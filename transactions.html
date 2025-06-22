@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Transactions - Halal Grocery App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#10b981',
+                        secondary: '#ffa726'
+                    },
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 min-h-screen font-poppins">
+    <div class="max-w-2xl mx-auto bg-white shadow-xl min-h-screen">
+        <!-- Header -->
+        <div class="bg-white text-gray-800 p-6 border-b border-gray-100">
+            <div class="flex justify-between items-center mb-4">
+                <div class="flex items-center">
+                    <button onclick="history.back()" class="mr-4 p-2 hover:bg-white/20 rounded-full transition-colors duration-200">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                        </svg>
+                    </button>
+                    <h1 class="text-2xl font-bold text-gray-800">My Transactions</h1>
+                </div>
+                <button class="p-2 hover:bg-gray-100 rounded-full transition-colors duration-200">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.207A1 1 0 013 6.5V4z"/>
+                    </svg>
+                </button>
+            </div>
+            <p class="text-gray-600">Track all your orders</p>
+        </div>
+        
+        <!-- Filter Tabs -->
+        <div class="p-4 bg-white border-b border-gray-100">
+            <div class="flex space-x-2 overflow-x-auto">
+                <button class="px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm font-medium whitespace-nowrap">All Orders</button>
+                <button class="px-4 py-2 bg-gray-100 text-gray-600 rounded-full text-sm font-medium whitespace-nowrap">Processing</button>
+                <button class="px-4 py-2 bg-gray-100 text-gray-600 rounded-full text-sm font-medium whitespace-nowrap">Delivered</button>
+                <button class="px-4 py-2 bg-gray-100 text-gray-600 rounded-full text-sm font-medium whitespace-nowrap">Cancelled</button>
+            </div>
+        </div>
+        
+        <!-- Content -->
+        <div class="p-6">
+            <!-- Transaction List -->
+            <div class="space-y-4">
+                <!-- Transaction 1 -->
+                <a href="transaction-detail.html" class="bg-white rounded-2xl shadow-lg p-4 border border-gray-100 cursor-pointer hover:shadow-xl transition-shadow duration-300 block">
+                    <div class="flex items-center justify-between mb-3">
+                        <div>
+                            <h3 class="font-bold text-gray-800">#ORD-2024-001</h3>
+                            <p class="text-sm text-gray-500">Dec 20, 2024 • 14:30</p>
+                        </div>
+                        <span class="bg-green-100 text-green-700 text-xs px-3 py-1 rounded-full font-medium">Delivered</span>
+                    </div>
+                    
+                    <div class="flex items-center space-x-3 mb-3">
+                        <div class="flex -space-x-2">
+                            <div class="w-8 h-8 bg-gray-100 rounded-lg overflow-hidden border-2 border-white">
+                                <img src="https://images.unsplash.com/photo-1590502593747-42a4e2643a36?w=100&h=100&fit=crop&crop=center" alt="Product" class="w-full h-full object-cover">
+                            </div>
+                            <div class="w-8 h-8 bg-gray-100 rounded-lg overflow-hidden border-2 border-white">
+                                <img src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=100&h=100&fit=crop&crop=center" alt="Product" class="w-full h-full object-cover">
+                            </div>
+                            <div class="w-8 h-8 bg-gray-100 rounded-lg overflow-hidden border-2 border-white">
+                                <img src="https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=100&h=100&fit=crop&crop=center" alt="Product" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                        <span class="text-sm text-gray-600">3 items</span>
+                    </div>
+                    
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm text-gray-500">Total Amount</p>
+                            <p class="text-lg font-bold text-gray-800">$43</p>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button class="px-4 py-2 bg-green-100 text-green-700 rounded-xl text-sm font-medium hover:bg-green-200 transition-colors duration-200">
+                                Reorder
+                            </button>
+                            <button class="px-4 py-2 bg-blue-100 text-blue-700 rounded-xl text-sm font-medium hover:bg-blue-200 transition-colors duration-200">
+                                Review
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Transaction 2 -->
+                <div class="bg-white rounded-2xl shadow-lg p-4 border border-gray-100 cursor-pointer hover:shadow-xl transition-shadow duration-300">
+                    <div class="flex items-center justify-between mb-3">
+                        <div>
+                            <h3 class="font-bold text-gray-800">#ORD-2024-002</h3>
+                            <p class="text-sm text-gray-500">Dec 18, 2024 • 10:15</p>
+                        </div>
+                        <span class="bg-blue-100 text-blue-700 text-xs px-3 py-1 rounded-full font-medium">Processing</span>
+                    </div>
+                    
+                    <div class="flex items-center space-x-3 mb-3">
+                        <div class="flex -space-x-2">
+                            <div class="w-8 h-8 bg-gray-100 rounded-lg overflow-hidden border-2 border-white">
+                                <img src="https://images.unsplash.com/photo-1576045057995-568f588f82fb?w=100&h=100&fit=crop&crop=center" alt="Product" class="w-full h-full object-cover">
+                            </div>
+                            <div class="w-8 h-8 bg-gray-100 rounded-lg overflow-hidden border-2 border-white">
+                                <img src="https://images.unsplash.com/photo-1445282768818-728615cc910a?w=100&h=100&fit=crop&crop=center" alt="Product" class="w-full h-full object-cover">
+                            </div>
+                            <div class="w-8 h-8 bg-gray-200 rounded-lg flex items-center justify-center border-2 border-white">
+                                <span class="text-xs font-medium text-gray-600">+3</span>
+                            </div>
+                        </div>
+                        <span class="text-sm text-gray-600">5 items</span>
+                    </div>
+                    
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm text-gray-500">Total Amount</p>
+                            <p class="text-lg font-bold text-gray-800">$67</p>
+                        </div>
+                        <div class="flex space-x-2">
+                            <a href="track-order.html" class="px-4 py-2 bg-orange-100 text-orange-700 rounded-xl text-sm font-medium hover:bg-orange-200 transition-colors duration-200">
+                                Track Order
+                            </a>
+                            <button class="px-4 py-2 bg-red-100 text-red-700 rounded-xl text-sm font-medium hover:bg-red-200 transition-colors duration-200">
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Transaction 3 -->
+                <div class="bg-white rounded-2xl shadow-lg p-4 border border-gray-100 cursor-pointer hover:shadow-xl transition-shadow duration-300">
+                    <div class="flex items-center justify-between mb-3">
+                        <div>
+                            <h3 class="font-bold text-gray-800">#ORD-2024-003</h3>
+                            <p class="text-sm text-gray-500">Dec 15, 2024 • 16:45</p>
+                        </div>
+                        <span class="bg-green-100 text-green-700 text-xs px-3 py-1 rounded-full font-medium">Delivered</span>
+                    </div>
+                    
+                    <div class="flex items-center space-x-3 mb-3">
+                        <div class="flex -space-x-2">
+                            <div class="w-8 h-8 bg-gray-100 rounded-lg overflow-hidden border-2 border-white">
+                                <img src="https://images.unsplash.com/photo-1459411621453-7b03977f4bfc?w=100&h=100&fit=crop&crop=center" alt="Product" class="w-full h-full object-cover">
+                            </div>
+                            <div class="w-8 h-8 bg-gray-100 rounded-lg overflow-hidden border-2 border-white">
+                                <img src="https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=100&h=100&fit=crop&crop=center" alt="Product" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                        <span class="text-sm text-gray-600">2 items</span>
+                    </div>
+                    
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm text-gray-500">Total Amount</p>
+                            <p class="text-lg font-bold text-gray-800">$25</p>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button class="px-4 py-2 bg-green-100 text-green-700 rounded-xl text-sm font-medium hover:bg-green-200 transition-colors duration-200">
+                                Reorder
+                            </button>
+                            <button class="px-4 py-2 bg-blue-100 text-blue-700 rounded-xl text-sm font-medium hover:bg-blue-200 transition-colors duration-200">
+                                Review
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Transaction 4 -->
+                <div class="bg-white rounded-2xl shadow-lg p-4 border border-gray-100 cursor-pointer hover:shadow-xl transition-shadow duration-300">
+                    <div class="flex items-center justify-between mb-3">
+                        <div>
+                            <h3 class="font-bold text-gray-800">#ORD-2024-004</h3>
+                            <p class="text-sm text-gray-500">Dec 12, 2024 • 09:20</p>
+                        </div>
+                        <span class="bg-red-100 text-red-700 text-xs px-3 py-1 rounded-full font-medium">Cancelled</span>
+                    </div>
+                    
+                    <div class="flex items-center space-x-3 mb-3">
+                        <div class="flex -space-x-2">
+                            <div class="w-8 h-8 bg-gray-100 rounded-lg overflow-hidden border-2 border-white">
+                                <img src="https://images.unsplash.com/photo-1551754655-cd27e38d2076?w=100&h=100&fit=crop&crop=center" alt="Product" class="w-full h-full object-cover">
+                            </div>
+                            <div class="w-8 h-8 bg-gray-100 rounded-lg overflow-hidden border-2 border-white">
+                                <img src="https://images.unsplash.com/photo-1563565375-f3fdfdbefa83?w=100&h=100&fit=crop&crop=center" alt="Product" class="w-full h-full object-cover">
+                            </div>
+                            <div class="w-8 h-8 bg-gray-100 rounded-lg overflow-hidden border-2 border-white">
+                                <img src="https://images.unsplash.com/photo-1604977042946-1eecc30f269e?w=100&h=100&fit=crop&crop=center" alt="Product" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                        <span class="text-sm text-gray-600">3 items</span>
+                    </div>
+                    
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm text-gray-500">Total Amount</p>
+                            <p class="text-lg font-bold text-gray-400 line-through">$38</p>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button class="px-4 py-2 bg-green-100 text-green-700 rounded-xl text-sm font-medium hover:bg-green-200 transition-colors duration-200">
+                                Reorder
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Transaction 5 -->
+                <div class="bg-white rounded-2xl shadow-lg p-4 border border-gray-100 cursor-pointer hover:shadow-xl transition-shadow duration-300">
+                    <div class="flex items-center justify-between mb-3">
+                        <div>
+                            <h3 class="font-bold text-gray-800">#ORD-2024-005</h3>
+                            <p class="text-sm text-gray-500">Dec 10, 2024 • 13:10</p>
+                        </div>
+                        <span class="bg-green-100 text-green-700 text-xs px-3 py-1 rounded-full font-medium">Delivered</span>
+                    </div>
+                    
+                    <div class="flex items-center space-x-3 mb-3">
+                        <div class="flex -space-x-2">
+                            <div class="w-8 h-8 bg-gray-100 rounded-lg overflow-hidden border-2 border-white">
+                                <img src="https://images.unsplash.com/photo-1570197788417-0e82375c9371?w=100&h=100&fit=crop&crop=center" alt="Product" class="w-full h-full object-cover">
+                            </div>
+                            <div class="w-8 h-8 bg-gray-100 rounded-lg overflow-hidden border-2 border-white">
+                                <img src="https://images.unsplash.com/photo-1594282437017-e3686ba03a29?w=100&h=100&fit=crop&crop=center" alt="Product" class="w-full h-full object-cover">
+                            </div>
+                            <div class="w-8 h-8 bg-gray-200 rounded-lg flex items-center justify-center border-2 border-white">
+                                <span class="text-xs font-medium text-gray-600">+2</span>
+                            </div>
+                        </div>
+                        <span class="text-sm text-gray-600">4 items</span>
+                    </div>
+                    
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm text-gray-500">Total Amount</p>
+                            <p class="text-lg font-bold text-gray-800">$52</p>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button class="px-4 py-2 bg-green-100 text-green-700 rounded-xl text-sm font-medium hover:bg-green-200 transition-colors duration-200">
+                                Reorder
+                            </button>
+                            <button class="px-4 py-2 bg-blue-100 text-blue-700 rounded-xl text-sm font-medium hover:bg-blue-200 transition-colors duration-200">
+                                Review
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Load More -->
+            <div class="text-center mt-8">
+                <button class="px-6 py-3 bg-gray-100 text-gray-600 rounded-2xl font-medium hover:bg-gray-200 transition-colors duration-300">
+                    Load More Orders
+                </button>
+            </div>
+        </div>
+        
+        <!-- Bottom Navigation -->
+        <div class="bg-white border-t border-gray-200 p-4 sticky bottom-0">
+            <div class="flex justify-around items-center">
+                <button class="flex flex-col items-center space-y-1 text-gray-400">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                    </svg>
+                    <span class="text-xs font-medium">Home</span>
+                </button>
+                
+                <button class="flex flex-col items-center space-y-1 text-gray-400">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
+                    </svg>
+                    <span class="text-xs font-medium">Categories</span>
+                </button>
+                
+                <button class="flex flex-col items-center space-y-1 text-green-600">
+                    <div class="w-6 h-6 bg-green-600 rounded-lg flex items-center justify-center">
+                        <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/>
+                        </svg>
+                    </div>
+                    <span class="text-xs font-medium">Transactions</span>
+                </button>
+                
+                <button class="flex flex-col items-center space-y-1 text-gray-400">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    <span class="text-xs font-medium">Profile</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

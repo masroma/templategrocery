@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Details - Halal Grocery App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#10b981',
+                        secondary: '#ffa726'
+                    },
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 min-h-screen font-poppins">
+    <div class="max-w-2xl mx-auto bg-white shadow-xl min-h-screen">
+        <!-- Header -->
+        <div class="bg-white text-gray-800 p-6 border-b border-gray-100">
+            <div class="flex justify-between items-center mb-4">
+                <div class="flex items-center">
+                    <button onclick="history.back()" class="mr-4 p-2 hover:bg-white/20 rounded-full transition-colors duration-200">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                        </svg>
+                    </button>
+                    <h1 class="text-2xl font-bold text-gray-800">Order Details</h1>
+                </div>
+                <button class="p-2 hover:bg-gray-100 rounded-full transition-colors duration-200">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="flex justify-between items-center">
+                <div>
+                    <p class="text-gray-500 text-sm">Order ID</p>
+                    <p class="text-xl font-bold text-gray-800">#ORD-2024-001</p>
+                </div>
+                <span class="bg-green-100 text-green-700 text-sm px-4 py-2 rounded-full font-medium">Delivered</span>
+            </div>
+        </div>
+        
+        <!-- Content -->
+        <div class="p-6">
+            <!-- Order Status Timeline -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 border border-gray-100 mb-6">
+                <h3 class="font-semibold text-gray-800 mb-4">Order Status</h3>
+                <div class="space-y-4">
+                    <div class="flex items-center">
+                        <div class="w-4 h-4 bg-green-500 rounded-full mr-4"></div>
+                        <div class="flex-1">
+                            <p class="font-medium text-gray-800">Order Delivered</p>
+                            <p class="text-sm text-gray-500">Dec 20, 2024 • 15:30</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-4 h-4 bg-green-500 rounded-full mr-4"></div>
+                        <div class="flex-1">
+                            <p class="font-medium text-gray-800">Out for Delivery</p>
+                            <p class="text-sm text-gray-500">Dec 20, 2024 • 14:45</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-4 h-4 bg-green-500 rounded-full mr-4"></div>
+                        <div class="flex-1">
+                            <p class="font-medium text-gray-800">Order Prepared</p>
+                            <p class="text-sm text-gray-500">Dec 20, 2024 • 14:15</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-4 h-4 bg-green-500 rounded-full mr-4"></div>
+                        <div class="flex-1">
+                            <p class="font-medium text-gray-800">Order Confirmed</p>
+                            <p class="text-sm text-gray-500">Dec 20, 2024 • 14:00</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Order Items -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 border border-gray-100 mb-6">
+                <h3 class="font-semibold text-gray-800 mb-4">Order Items</h3>
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-16 h-16 bg-gray-100 rounded-xl overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1590502593747-42a4e2643a36?w=200&h=200&fit=crop&crop=center" alt="Fresh Lemon" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-medium text-gray-800">Fresh Lemon</h4>
+                            <p class="text-sm text-gray-500">Organic • 1kg</p>
+                            <p class="text-sm text-gray-600">Qty: 2</p>
+                        </div>
+                        <span class="font-medium text-gray-800">$24</span>
+                    </div>
+                    
+                    <div class="flex items-center space-x-4">
+                        <div class="w-16 h-16 bg-gray-100 rounded-xl overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=200&h=200&fit=crop&crop=center" alt="Green Tea" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-medium text-gray-800">Green Tea</h4>
+                            <p class="text-sm text-gray-500">Organic • 250g</p>
+                            <p class="text-sm text-gray-600">Qty: 1</p>
+                        </div>
+                        <span class="font-medium text-gray-800">$6</span>
+                    </div>
+                    
+                    <div class="flex items-center space-x-4">
+                        <div class="w-16 h-16 bg-gray-100 rounded-xl overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=200&h=200&fit=crop&crop=center" alt="Organic Tomatoes" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-medium text-gray-800">Organic Tomatoes</h4>
+                            <p class="text-sm text-gray-500">Fresh • 1kg</p>
+                            <p class="text-sm text-gray-600">Qty: 1</p>
+                        </div>
+                        <span class="font-medium text-gray-800">$15</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Delivery Information -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 border border-gray-100 mb-6">
+                <h3 class="font-semibold text-gray-800 mb-4">Delivery Information</h3>
+                <div class="space-y-3">
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Delivery Address</span>
+                        <span class="font-medium text-gray-800 text-right">Green Way 3000, Sylhet<br>Sylhet Division, Bangladesh</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Delivery Time</span>
+                        <span class="font-medium text-gray-800">Dec 20, 2024 • 15:30</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Delivery Person</span>
+                        <span class="font-medium text-gray-800">Rahman Ali</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Contact</span>
+                        <span class="font-medium text-gray-800">+880 1234 567890</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Payment Information -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 border border-gray-100 mb-6">
+                <h3 class="font-semibold text-gray-800 mb-4">Payment Information</h3>
+                <div class="space-y-3">
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Payment Method</span>
+                        <span class="font-medium text-gray-800">Cash on Delivery</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Payment Status</span>
+                        <span class="bg-green-100 text-green-700 text-xs px-2 py-1 rounded-full font-medium">Paid</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Order Summary -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 border border-gray-100 mb-6">
+                <h3 class="font-semibold text-gray-800 mb-4">Order Summary</h3>
+                <div class="space-y-3">
+                    <div class="flex justify-between text-gray-600">
+                        <span>Subtotal</span>
+                        <span>$45</span>
+                    </div>
+                    <div class="flex justify-between text-gray-600">
+                        <span>Delivery Fee</span>
+                        <span>$3</span>
+                    </div>
+                    <div class="flex justify-between text-green-600">
+                        <span>Discount</span>
+                        <span>-$5</span>
+                    </div>
+                    <div class="border-t border-gray-200 pt-3">
+                        <div class="flex justify-between text-xl font-bold text-gray-800">
+                            <span>Total</span>
+                            <span>$43</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Action Buttons -->
+            <div class="space-y-3">
+                <button class="w-full bg-gradient-to-r from-green-500 to-green-600 text-white py-4 rounded-2xl font-bold text-lg hover:from-green-600 hover:to-green-700 transition-all duration-300 transform hover:scale-[1.02]">
+                    Reorder Items
+                </button>
+                <a href="review-transaction.html" class="w-full bg-blue-100 text-blue-700 py-4 rounded-2xl font-bold text-lg hover:bg-blue-200 transition-colors duration-300 block text-center">
+                    Write Review
+                </a>
+                <button class="w-full bg-gray-100 text-gray-700 py-4 rounded-2xl font-bold text-lg hover:bg-gray-200 transition-colors duration-300">
+                    Download Invoice
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

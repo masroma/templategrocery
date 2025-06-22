@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wishlist - Halal Grocery App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#10b981',
+                        secondary: '#ffa726'
+                    },
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 min-h-screen font-poppins">
+    <div class="max-w-2xl mx-auto bg-white shadow-xl min-h-screen">
+        <!-- Header -->
+        <div class="bg-white text-gray-800 p-6 border-b border-gray-100">
+            <div class="flex justify-between items-center mb-4">
+                <div class="flex items-center">
+                    <button onclick="history.back()" class="mr-4 p-2 hover:bg-white/20 rounded-full transition-colors duration-200">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                        </svg>
+                    </button>
+                    <h1 class="text-2xl font-bold text-gray-800">My Wishlist</h1>
+                </div>
+                <div class="relative">
+                    <div class="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                        </svg>
+                    </div>
+                    <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
+                </div>
+            </div>
+            <p class="text-green-100">5 items saved for later</p>
+        </div>
+        
+        <!-- Content -->
+        <div class="p-6">
+            <!-- Wishlist Items -->
+            <div class="space-y-4">
+                <!-- Wishlist Item 1 -->
+                <div class="bg-white rounded-2xl shadow-lg p-4 border border-gray-100">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-20 h-20 bg-gray-100 rounded-xl overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1590502593747-42a4e2643a36?w=200&h=200&fit=crop&crop=center" alt="Fresh Lemon" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-bold text-gray-800 mb-1">Fresh Lemon</h3>
+                            <p class="text-sm text-gray-500 mb-2">Organic • 1kg</p>
+                            <div class="flex items-center space-x-2">
+                                <span class="text-lg font-bold text-green-600">$12</span>
+                                <span class="text-sm text-gray-400 line-through">$15</span>
+                            </div>
+                        </div>
+                        <div class="flex flex-col space-y-2">
+                            <button class="w-10 h-10 bg-green-600 text-white rounded-full flex items-center justify-center hover:bg-green-700 transition-colors duration-200">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                                </svg>
+                            </button>
+                            <button class="w-10 h-10 bg-red-100 text-red-600 rounded-full flex items-center justify-center hover:bg-red-200 transition-colors duration-200">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Wishlist Item 2 -->
+                <div class="bg-white rounded-2xl shadow-lg p-4 border border-gray-100">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-20 h-20 bg-gray-100 rounded-xl overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=200&h=200&fit=crop&crop=center" alt="Green Tea" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-bold text-gray-800 mb-1">Green Tea</h3>
+                            <p class="text-sm text-gray-500 mb-2">Organic • 250g</p>
+                            <div class="flex items-center space-x-2">
+                                <span class="text-lg font-bold text-green-600">$6</span>
+                                <span class="bg-green-100 text-green-700 text-xs px-2 py-1 rounded-full">In Stock</span>
+                            </div>
+                        </div>
+                        <div class="flex flex-col space-y-2">
+                            <button class="w-10 h-10 bg-green-600 text-white rounded-full flex items-center justify-center hover:bg-green-700 transition-colors duration-200">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                                </svg>
+                            </button>
+                            <button class="w-10 h-10 bg-red-100 text-red-600 rounded-full flex items-center justify-center hover:bg-red-200 transition-colors duration-200">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Wishlist Item 3 -->
+                <div class="bg-white rounded-2xl shadow-lg p-4 border border-gray-100">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-20 h-20 bg-gray-100 rounded-xl overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=200&h=200&fit=crop&crop=center" alt="Organic Tomatoes" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-bold text-gray-800 mb-1">Organic Tomatoes</h3>
+                            <p class="text-sm text-gray-500 mb-2">Fresh • 1kg</p>
+                            <div class="flex items-center space-x-2">
+                                <span class="text-lg font-bold text-green-600">$15</span>
+                                <span class="bg-red-100 text-red-700 text-xs px-2 py-1 rounded-full">Low Stock</span>
+                            </div>
+                        </div>
+                        <div class="flex flex-col space-y-2">
+                            <button class="w-10 h-10 bg-green-600 text-white rounded-full flex items-center justify-center hover:bg-green-700 transition-colors duration-200">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                                </svg>
+                            </button>
+                            <button class="w-10 h-10 bg-red-100 text-red-600 rounded-full flex items-center justify-center hover:bg-red-200 transition-colors duration-200">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Wishlist Item 4 -->
+                <div class="bg-white rounded-2xl shadow-lg p-4 border border-gray-100">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-20 h-20 bg-gray-100 rounded-xl overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1576045057995-568f588f82fb?w=200&h=200&fit=crop&crop=center" alt="Fresh Spinach" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-bold text-gray-800 mb-1">Fresh Spinach</h3>
+                            <p class="text-sm text-gray-500 mb-2">Organic • 300g</p>
+                            <div class="flex items-center space-x-2">
+                                <span class="text-lg font-bold text-green-600">$10</span>
+                                <span class="bg-green-100 text-green-700 text-xs px-2 py-1 rounded-full">In Stock</span>
+                            </div>
+                        </div>
+                        <div class="flex flex-col space-y-2">
+                            <button class="w-10 h-10 bg-green-600 text-white rounded-full flex items-center justify-center hover:bg-green-700 transition-colors duration-200">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                                </svg>
+                            </button>
+                            <button class="w-10 h-10 bg-red-100 text-red-600 rounded-full flex items-center justify-center hover:bg-red-200 transition-colors duration-200">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Wishlist Item 5 -->
+                <div class="bg-white rounded-2xl shadow-lg p-4 border border-gray-100">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-20 h-20 bg-gray-100 rounded-xl overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1445282768818-728615cc910a?w=200&h=200&fit=crop&crop=center" alt="Fresh Carrots" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-bold text-gray-800 mb-1">Fresh Carrots</h3>
+                            <p class="text-sm text-gray-500 mb-2">Organic • 500g</p>
+                            <div class="flex items-center space-x-2">
+                                <span class="text-lg font-bold text-gray-400">$12</span>
+                                <span class="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded-full">Out of Stock</span>
+                            </div>
+                        </div>
+                        <div class="flex flex-col space-y-2">
+                            <button disabled class="w-10 h-10 bg-gray-300 text-gray-500 rounded-full flex items-center justify-center cursor-not-allowed">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                                </svg>
+                            </button>
+                            <button class="w-10 h-10 bg-red-100 text-red-600 rounded-full flex items-center justify-center hover:bg-red-200 transition-colors duration-200">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Action Buttons -->
+            <div class="mt-8 space-y-3">
+                <a href="cart.html" class="w-full bg-gradient-to-r from-green-500 to-green-600 text-white py-4 rounded-2xl font-bold text-lg hover:from-green-600 hover:to-green-700 transition-all duration-300 transform hover:scale-[1.02] block text-center">
+                    Add All to Cart
+                </a>
+                <button class="w-full bg-red-100 text-red-600 py-4 rounded-2xl font-bold text-lg hover:bg-red-200 transition-colors duration-300">
+                    Clear Wishlist
+                </button>
+            </div>
+            
+            <!-- Recommended Products -->
+            <div class="mt-8">
+                <h2 class="text-xl font-bold text-gray-800 mb-4">You Might Also Like</h2>
+                <div class="grid grid-cols-2 gap-4">
+                    <!-- Recommended Product 1 -->
+                    <div class="bg-white rounded-2xl shadow-lg p-4 hover:shadow-xl transition-shadow duration-300 cursor-pointer border border-gray-100">
+                        <div class="relative">
+                            <div class="w-full h-32 bg-gray-100 rounded-xl mb-3 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=200&h=200&fit=crop&crop=center" alt="Fresh Lime" class="w-full h-full object-cover">
+                            </div>
+                            <button class="absolute top-2 right-2 w-8 h-8 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white transition-colors duration-200">
+                                <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <h3 class="font-bold text-gray-800 text-sm mb-1">Fresh Lime</h3>
+                        <p class="text-xs text-gray-500 mb-2">Organic • 500g</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm font-bold text-gray-800">$8</span>
+                            <button class="w-6 h-6 bg-green-600 text-white rounded-full flex items-center justify-center hover:bg-green-700 transition-colors duration-200">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Recommended Product 2 -->
+                    <div class="bg-white rounded-2xl shadow-lg p-4 hover:shadow-xl transition-shadow duration-300 cursor-pointer border border-gray-100">
+                        <div class="relative">
+                            <div class="w-full h-32 bg-gray-100 rounded-xl mb-3 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1459411621453-7b03977f4bfc?w=200&h=200&fit=crop&crop=center" alt="Broccoli" class="w-full h-full object-cover">
+                            </div>
+                            <button class="absolute top-2 right-2 w-8 h-8 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white transition-colors duration-200">
+                                <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <h3 class="font-bold text-gray-800 text-sm mb-1">Broccoli</h3>
+                        <p class="text-xs text-gray-500 mb-2">Fresh • 400g</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm font-bold text-gray-800">$8</span>
+                            <button class="w-6 h-6 bg-green-600 text-white rounded-full flex items-center justify-center hover:bg-green-700 transition-colors duration-200">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Bottom Navigation -->
+        <div class="bg-white border-t border-gray-200 p-4 sticky bottom-0">
+            <div class="flex justify-around items-center">
+                <button class="flex flex-col items-center space-y-1 text-gray-400">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                    </svg>
+                    <span class="text-xs font-medium">Home</span>
+                </button>
+                
+                <button class="flex flex-col items-center space-y-1 text-gray-400">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
+                    </svg>
+                    <span class="text-xs font-medium">Categories</span>
+                </button>
+                
+                <button class="flex flex-col items-center space-y-1 text-gray-400">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/>
+                    </svg>
+                    <span class="text-xs font-medium">Transactions</span>
+                </button>
+                
+                <button class="flex flex-col items-center space-y-1 text-gray-400">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    <span class="text-xs font-medium">Profile</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

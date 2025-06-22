@@ -21,28 +21,44 @@
             }
         }
     </script>
+    <style>
+        /* Hide scrollbar for mobile sliders */
+        .scrollbar-hide {
+            -ms-overflow-style: none;  /* Internet Explorer 10+ */
+            scrollbar-width: none;  /* Firefox */
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;  /* Safari and Chrome */
+        }
+
+        /* Smooth scrolling for mobile */
+        .scrollbar-hide {
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+    </style>
 </head>
 <body class="bg-gray-50 min-h-screen font-poppins">
     <div class="max-w-2xl mx-auto bg-white shadow-xl min-h-screen">
         <!-- Header -->
-        <div class="bg-gradient-to-r from-green-600 to-green-700 text-white p-6 rounded-b-3xl">
+        <div class="bg-white text-gray-800 p-6 border-b border-gray-100">
             <div class="flex justify-between items-center mb-6">
-                <h1 class="text-2xl font-bold">Hey, Halal</h1>
-                <div class="relative">
-                    <div class="w-10 h-10 bg-yellow-400 rounded-full flex items-center justify-center">
+                <h1 class="text-2xl font-bold">Halo, Halal</h1>
+                <a href="cart.html" class="relative">
+                    <div class="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center hover:bg-green-700 transition-colors duration-200">
                         <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
                         </svg>
                     </div>
                     <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
-                </div>
+                </a>
             </div>
             
             <!-- Search Bar -->
             <div class="relative mb-6">
-                <input type="text" placeholder="Search Products or store" 
-                       class="w-full bg-white/20 backdrop-blur-sm text-white placeholder-green-100 px-12 py-4 rounded-2xl border border-green-400/30 focus:outline-none focus:ring-2 focus:ring-green-300 focus:bg-white/30 transition-all duration-300">
-                <svg class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-green-100" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <input type="text" placeholder="Cari produk atau toko"
+                       class="w-full bg-gray-50 text-gray-800 placeholder-gray-500 px-12 py-4 rounded-2xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-300">
+                <svg class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                 </svg>
             </div>
@@ -50,19 +66,19 @@
             <!-- Delivery Info -->
             <div class="flex justify-between items-center text-sm">
                 <div>
-                    <p class="text-green-200 mb-1">DELIVERY TO</p>
+                    <p class="text-gray-500 mb-1">KIRIM KE</p>
                     <div class="flex items-center">
-                        <span class="font-semibold">Green Way 3000, Sylhet</span>
-                        <svg class="w-4 h-4 ml-2 text-green-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <span class="font-semibold text-gray-800">Jl. Sudirman No. 123, Jakarta</span>
+                        <svg class="w-4 h-4 ml-2 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                         </svg>
                     </div>
                 </div>
                 <div class="text-right">
-                    <p class="text-green-200 mb-1">WITHIN</p>
+                    <p class="text-gray-500 mb-1">DALAM</p>
                     <div class="flex items-center">
-                        <span class="font-semibold">1 Hour</span>
-                        <svg class="w-4 h-4 ml-2 text-green-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <span class="font-semibold text-gray-800">1 Jam</span>
+                        <svg class="w-4 h-4 ml-2 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                         </svg>
                     </div>
@@ -112,25 +128,25 @@
             <!-- Categories Section (Slider) -->
             <div class="mb-8">
                 <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-2xl font-bold text-gray-800">Categories</h2>
+                    <h2 class="text-2xl font-bold text-gray-800">Kategori</h2>
                 </div>
                 
                 <div class="relative">
-                    <div class="overflow-hidden">
-                        <div class="flex space-x-4 transition-transform duration-500 ease-in-out" id="categorySlider">
-                            <div class="min-w-[140px] bg-orange-50 p-4 rounded-2xl text-center hover:bg-orange-100 transition-colors duration-200 cursor-pointer">
+                    <div class="overflow-x-auto scrollbar-hide" id="categoryScrollContainer">
+                        <div class="flex space-x-4 pb-2" style="scroll-snap-type: x mandatory;" id="categorySlider">
+                            <a href="products.html" class="min-w-[140px] bg-orange-50 p-4 rounded-2xl text-center hover:bg-orange-100 transition-colors duration-200 cursor-pointer block" style="scroll-snap-align: start;">
                                 <div class="w-12 h-12 bg-orange-200 rounded-xl mx-auto mb-3 overflow-hidden">
                                     <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=100&h=100&fit=crop&crop=center" alt="Fruits" class="w-full h-full object-cover">
                                 </div>
-                                <h3 class="font-semibold text-gray-800">Fruits</h3>
-                            </div>
-                            
-                            <div class="min-w-[140px] bg-green-50 p-4 rounded-2xl text-center hover:bg-green-100 transition-colors duration-200 cursor-pointer">
+                                <h3 class="font-semibold text-gray-800">Buah-buahan</h3>
+                            </a>
+
+                            <a href="products.html" class="min-w-[140px] bg-green-50 p-4 rounded-2xl text-center hover:bg-green-100 transition-colors duration-200 cursor-pointer block">
                                 <div class="w-12 h-12 bg-green-200 rounded-xl mx-auto mb-3 overflow-hidden">
                                     <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?w=100&h=100&fit=crop&crop=center" alt="Vegetables" class="w-full h-full object-cover">
                                 </div>
-                                <h3 class="font-semibold text-gray-800">Vegetables</h3>
-                            </div>
+                                <h3 class="font-semibold text-gray-800">Sayuran</h3>
+                            </a>
                             
                             <div class="min-w-[140px] bg-blue-50 p-4 rounded-2xl text-center hover:bg-blue-100 transition-colors duration-200 cursor-pointer">
                                 <div class="w-12 h-12 bg-blue-200 rounded-xl mx-auto mb-3 overflow-hidden">
@@ -179,10 +195,10 @@
                 
                 <!-- Product Slider -->
                 <div class="relative">
-                    <div class="overflow-hidden">
-                        <div class="flex space-x-4 transition-transform duration-500 ease-in-out" id="productSlider">
+                    <div class="overflow-x-auto scrollbar-hide" id="productScrollContainer">
+                        <div class="flex space-x-4 pb-2" style="scroll-snap-type: x mandatory;" id="productSlider">
                             <!-- Fresh Lemon -->
-                            <div class="min-w-[200px] bg-white rounded-2xl shadow-lg p-4 hover:shadow-xl transition-shadow duration-300">
+                            <a href="product-detail.html" class="min-w-[200px] bg-white rounded-2xl shadow-lg p-4 hover:shadow-xl transition-shadow duration-300 block" style="scroll-snap-align: start;">
                                 <div class="w-full h-36 bg-gray-100 rounded-xl mb-4 overflow-hidden">
                                     <img src="https://images.unsplash.com/photo-1590502593747-42a4e2643a36?w=200&h=200&fit=crop&crop=center" alt="Fresh Lemon" class="w-full h-full object-cover">
                                 </div>
@@ -190,13 +206,13 @@
                                 <p class="text-sm text-gray-500 mb-3">Organic</p>
                                 <div class="flex justify-between items-center">
                                     <span class="text-lg font-bold text-gray-800">$12</span>
-                                    <button class="w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center hover:bg-green-700 transition-colors duration-200">
+                                    <button onclick="event.preventDefault(); event.stopPropagation(); addToCart()" class="w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center hover:bg-green-700 transition-colors duration-200">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
                                         </svg>
                                     </button>
                                 </div>
-                            </div>
+                            </a>
                             
                             <!-- Green Tea -->
                             <div class="min-w-[200px] bg-white rounded-2xl shadow-lg p-4 hover:shadow-xl transition-shadow duration-300">
@@ -266,8 +282,8 @@
                 </div>
                 
                 <div class="relative">
-                    <div class="overflow-hidden">
-                        <div class="flex space-x-4 transition-transform duration-500 ease-in-out" id="bestSellerSlider">
+                    <div class="overflow-x-auto scrollbar-hide" id="bestSellerScrollContainer">
+                        <div class="flex space-x-4 pb-2" style="scroll-snap-type: x mandatory;" id="bestSellerSlider">
                             <!-- Organic Tomatoes -->
                             <div class="min-w-[200px] bg-white rounded-2xl shadow-lg p-4 hover:shadow-xl transition-shadow duration-300">
                                 <div class="w-full h-36 bg-gray-100 rounded-xl mb-4 overflow-hidden relative">
@@ -617,133 +633,92 @@
                     <span class="text-xs font-medium">Home</span>
                 </button>
                 
-                <button class="flex flex-col items-center space-y-1 text-gray-400">
+                <a href="categories.html" class="flex flex-col items-center space-y-1 text-gray-400 hover:text-green-600 transition-colors duration-200">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
                     </svg>
                     <span class="text-xs font-medium">Categories</span>
-                </button>
-                
-                <button class="flex flex-col items-center space-y-1 text-gray-400">
+                </a>
+
+                <a href="transactions.html" class="flex flex-col items-center space-y-1 text-gray-400 hover:text-green-600 transition-colors duration-200">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/>
                     </svg>
                     <span class="text-xs font-medium">Transactions</span>
-                </button>
-                
-                <button class="flex flex-col items-center space-y-1 text-gray-400">
+                </a>
+
+                <a href="dashboard.html" class="flex flex-col items-center space-y-1 text-gray-400 hover:text-green-600 transition-colors duration-200">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                     </svg>
                     <span class="text-xs font-medium">Profile</span>
-                </button>
+                </a>
             </div>
         </div>
     </div>
 
     <script>
-        // Product Slider functionality
-        let currentSlide = 0;
-        const productSlider = document.getElementById('productSlider');
-        const slides = productSlider.children;
-        const totalSlides = slides.length;
-        const slideWidth = 220; // 200px + 20px gap
+        // Simplified slider for mobile-friendly experience
+        function scrollSlider(containerId, direction) {
+            const container = document.getElementById(containerId);
+            const scrollAmount = 220; // Scroll distance
 
-        function updateSlider() {
-            const translateX = -currentSlide * slideWidth;
-            productSlider.style.transform = `translateX(${translateX}px)`;
+            if (direction === 'next') {
+                container.scrollLeft += scrollAmount;
+            } else {
+                container.scrollLeft -= scrollAmount;
+            }
         }
 
-        document.getElementById('nextBtn').addEventListener('click', () => {
-            if (currentSlide < totalSlides - 2) {
-                currentSlide++;
-                updateSlider();
-            }
-        });
+        // Desktop navigation buttons (if they exist)
+        const nextBtn = document.getElementById('nextBtn');
+        const prevBtn = document.getElementById('prevBtn');
 
-        document.getElementById('prevBtn').addEventListener('click', () => {
-            if (currentSlide > 0) {
-                currentSlide--;
-                updateSlider();
-            }
-        });
-
-        // Category Slider functionality
-        let currentCategorySlide = 0;
-        const categorySlider = document.getElementById('categorySlider');
-        const categorySlides = categorySlider.children;
-        const totalCategorySlides = categorySlides.length;
-        const categorySlideWidth = 160; // 140px + 20px gap
-
-        function updateCategorySlider() {
-            const translateX = -currentCategorySlide * categorySlideWidth;
-            categorySlider.style.transform = `translateX(${translateX}px)`;
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => scrollSlider('productScrollContainer', 'next'));
+        }
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => scrollSlider('productScrollContainer', 'prev'));
         }
 
-        document.getElementById('categoryNextBtn').addEventListener('click', () => {
-            if (currentCategorySlide < totalCategorySlides - 2) {
-                currentCategorySlide++;
-                updateCategorySlider();
-            }
-        });
+        // Category navigation
+        const categoryNextBtn = document.getElementById('categoryNextBtn');
+        const categoryPrevBtn = document.getElementById('categoryPrevBtn');
 
-        document.getElementById('categoryPrevBtn').addEventListener('click', () => {
-            if (currentCategorySlide > 0) {
-                currentCategorySlide--;
-                updateCategorySlider();
-            }
-        });
-
-        // Best Seller Slider functionality
-        let currentBestSellerSlide = 0;
-        const bestSellerSlider = document.getElementById('bestSellerSlider');
-        const bestSellerSlides = bestSellerSlider.children;
-        const totalBestSellerSlides = bestSellerSlides.length;
-
-        function updateBestSellerSlider() {
-            const translateX = -currentBestSellerSlide * slideWidth;
-            bestSellerSlider.style.transform = `translateX(${translateX}px)`;
+        if (categoryNextBtn) {
+            categoryNextBtn.addEventListener('click', () => scrollSlider('categoryScrollContainer', 'next'));
+        }
+        if (categoryPrevBtn) {
+            categoryPrevBtn.addEventListener('click', () => scrollSlider('categoryScrollContainer', 'prev'));
         }
 
-        document.getElementById('bestSellerNextBtn').addEventListener('click', () => {
-            if (currentBestSellerSlide < totalBestSellerSlides - 2) {
-                currentBestSellerSlide++;
-                updateBestSellerSlider();
-            }
-        });
+        // Best Seller navigation
+        const bestSellerNextBtn = document.getElementById('bestSellerNextBtn');
+        const bestSellerPrevBtn = document.getElementById('bestSellerPrevBtn');
 
-        document.getElementById('bestSellerPrevBtn').addEventListener('click', () => {
-            if (currentBestSellerSlide > 0) {
-                currentBestSellerSlide--;
-                updateBestSellerSlider();
-            }
-        });
-
-        // Blog Slider functionality
-        let currentBlogSlide = 0;
-        const blogSlider = document.getElementById('blogSlider');
-        const blogSlides = blogSlider.children;
-        const totalBlogSlides = blogSlides.length;
-        const blogSlideWidth = 270; // 250px + 20px gap
-
-        function updateBlogSlider() {
-            const translateX = -currentBlogSlide * blogSlideWidth;
-            blogSlider.style.transform = `translateX(${translateX}px)`;
+        if (bestSellerNextBtn) {
+            bestSellerNextBtn.addEventListener('click', () => scrollSlider('bestSellerScrollContainer', 'next'));
+        }
+        if (bestSellerPrevBtn) {
+            bestSellerPrevBtn.addEventListener('click', () => scrollSlider('bestSellerScrollContainer', 'prev'));
         }
 
-        document.getElementById('blogNextBtn').addEventListener('click', () => {
-            if (currentBlogSlide < totalBlogSlides - 2) {
-                currentBlogSlide++;
-                updateBlogSlider();
-            }
-        });
+        // Blog navigation (this one still uses old structure, let's fix it)
+        const blogNextBtn = document.getElementById('blogNextBtn');
+        const blogPrevBtn = document.getElementById('blogPrevBtn');
 
-        document.getElementById('blogPrevBtn').addEventListener('click', () => {
-            if (currentBlogSlide > 0) {
-                currentBlogSlide--;
-                updateBlogSlider();
-            }
-        });
+        if (blogNextBtn) {
+            blogNextBtn.addEventListener('click', () => {
+                const blogContainer = document.querySelector('#blogSlider').parentElement;
+                blogContainer.scrollLeft += 270;
+            });
+        }
+        if (blogPrevBtn) {
+            blogPrevBtn.addEventListener('click', () => {
+                const blogContainer = document.querySelector('#blogSlider').parentElement;
+                blogContainer.scrollLeft -= 270;
+            });
+        }
 
         // Banner Slider functionality
         let currentBanner = 0;
@@ -779,78 +754,25 @@
             updateBannerSlider(nextBanner);
         }, 5000);
 
-        // Add touch/swipe functionality for mobile
-        function addSwipeListeners(slider, updateFunction, slideVar, totalSlides) {
-            let startX = 0;
-            let isDragging = false;
+        // Mobile-friendly: Native scroll with momentum
+        // No complex touch handlers needed - browser handles it natively
 
-            slider.addEventListener('touchstart', (e) => {
-                startX = e.touches[0].clientX;
-                isDragging = true;
-                slider.style.transition = 'none';
-            });
-
-            slider.addEventListener('touchmove', (e) => {
-                if (!isDragging) return;
-                e.preventDefault();
-            });
-
-            slider.addEventListener('touchend', (e) => {
-                if (!isDragging) return;
-                isDragging = false;
-                
-                slider.style.transition = 'transform 0.5s ease-in-out';
-                
-                const endX = e.changedTouches[0].clientX;
-                const diff = startX - endX;
-                
-                // Swipe left (next)
-                if (diff > 50) {
-                    if (slideVar === 'currentSlide' && currentSlide < totalSlides - 2) {
-                        currentSlide++;
-                        updateSlider();
-                    } else if (slideVar === 'currentCategorySlide' && currentCategorySlide < totalSlides - 2) {
-                        currentCategorySlide++;
-                        updateCategorySlider();
-                    } else if (slideVar === 'currentBestSellerSlide' && currentBestSellerSlide < totalSlides - 2) {
-                        currentBestSellerSlide++;
-                        updateBestSellerSlider();
-                    } else if (slideVar === 'currentBlogSlide' && currentBlogSlide < totalSlides - 2) {
-                        currentBlogSlide++;
-                        updateBlogSlider();
-                    }
-                }
-                // Swipe right (previous)
-                else if (diff < -50) {
-                    if (slideVar === 'currentSlide' && currentSlide > 0) {
-                        currentSlide--;
-                        updateSlider();
-                    } else if (slideVar === 'currentCategorySlide' && currentCategorySlide > 0) {
-                        currentCategorySlide--;
-                        updateCategorySlider();
-                    } else if (slideVar === 'currentBestSellerSlide' && currentBestSellerSlide > 0) {
-                        currentBestSellerSlide--;
-                        updateBestSellerSlider();
-                    } else if (slideVar === 'currentBlogSlide' && currentBlogSlide > 0) {
-                        currentBlogSlide--;
-                        updateBlogSlider();
-                    }
-                }
-            });
-        }
-
-        // Add swipe to all sliders
-        addSwipeListeners(productSlider, updateSlider, 'currentSlide', totalSlides);
-        addSwipeListeners(categorySlider, updateCategorySlider, 'currentCategorySlide', totalCategorySlides);
-        addSwipeListeners(bestSellerSlider, updateBestSellerSlider, 'currentBestSellerSlide', totalBestSellerSlides);
-        addSwipeListeners(blogSlider, updateBlogSlider, 'currentBlogSlide', totalBlogSlides);
-
-        // Add click animations
-        document.querySelectorAll('button').forEach(button => {
+        // Add click animations (exclude navigation buttons)
+        document.querySelectorAll('button:not([id*="Btn"]):not([id*="btn"])').forEach(button => {
             button.addEventListener('click', function() {
                 this.style.transform = 'scale(0.95)';
                 setTimeout(() => {
                     this.style.transform = 'scale(1)';
+                }, 150);
+            });
+        });
+
+        // Special animation for navigation buttons (no scale, just opacity)
+        document.querySelectorAll('button[id*="Btn"], button[id*="btn"]').forEach(button => {
+            button.addEventListener('click', function() {
+                this.style.opacity = '0.7';
+                setTimeout(() => {
+                    this.style.opacity = '1';
                 }, 150);
             });
         });
