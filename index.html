@@ -725,9 +725,9 @@
                     <h2 class="text-2xl font-bold text-gray-800">Latest Articles</h2>
                 </div>
                 
-                <div class="relative">
-                    <div class="overflow-hidden">
-                        <div class="flex space-x-4 transition-transform duration-500 ease-in-out" id="blogSlider">
+              <div class="relative">
+    <div class="overflow-x-auto scrollbar-hide" id="blogScrollContainer"> <!-- TAMBAHAN INI -->
+        <div class="flex space-x-4 pb-2" style="scroll-snap-type: x mandatory;" id="blogSlider"> <!-- UBAH INI -->
                             <!-- Blog 1 -->
                             <div class="min-w-[250px] bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
                                 <div class="w-full h-32 overflow-hidden">
