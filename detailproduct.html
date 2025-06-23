@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeruk Lemon Segar - Halo, Halal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#10b981',
+                        secondary: '#ffa726'
+                    },
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Hide scrollbar for mobile sliders */
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Smooth scrolling for mobile */
+        .scrollbar-hide {
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Strikethrough animation */
+        .price-strikethrough {
+            position: relative;
+            text-decoration: line-through;
+            text-decoration-color: #ef4444;
+            text-decoration-thickness: 2px;
+        }
+
+        /* Discount pulse animation */
+        @keyframes discountPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .discount-pulse {
+            animation: discountPulse 2s infinite;
+        }
+
+        /* Product image zoom */
+        .product-image {
+            transition: transform 0.3s ease;
+        }
+        .product-image:hover {
+            transform: scale(1.05);
+        }
+
+        /* Quantity button animations */
+        .quantity-btn {
+            transition: all 0.2s ease;
+        }
+        .quantity-btn:hover {
+            transform: scale(1.1);
+        }
+        .quantity-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Tab switching */
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Rating stars */
+        .star-rating {
+            display: flex;
+            gap: 2px;
+        }
+        .star {
+            color: #fbbf24;
+        }
+        .star.empty {
+            color: #d1d5db;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen font-poppins">
+    <div class="max-w-2xl mx-auto bg-white shadow-xl min-h-screen">
+        <!-- Header -->
+        <div class="bg-white text-gray-800 p-6 border-b border-gray-100 sticky top-0 z-30">
+            <div class="flex justify-between items-center">
+                <button onclick="goBack()" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors duration-200">
+                    <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                    </svg>
+                </button>
+                
+                <h1 class="text-lg font-bold text-gray-800">Detail Produk</h1>
+                
+                <div class="flex items-center space-x-3">
+                    <button class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors duration-200">
+                        <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                        </svg>
+                    </button>
+                    <a href="cart.html" class="relative">
+                        <div class="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center hover:bg-green-700 transition-colors duration-200">
+                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                            </svg>
+                        </div>
+                        <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Image Section -->
+        <div class="relative bg-gray-50 p-6">
+            <div class="relative w-full aspect-square bg-white rounded-3xl overflow-hidden shadow-lg">
+                <img id="mainProductImage" 
+                     src="https://images.unsplash.com/photo-1590502593747-42a4e2643a36?w=400&h=400&fit=crop&crop=center" 
+                     alt="Jeruk Lemon Segar" 
+                     class="w-full h-full object-cover product-image transition-opacity duration-300">
+                
+                <!-- Discount Badge -->
+                <span class="absolute top-4 left-4 bg-red-500 text-white text-sm px-3 py-1 rounded-full font-medium discount-pulse">30% OFF</span>
+                
+                <!-- Best Seller Badge -->
+                <span class="absolute top-4 right-4 bg-green-500 text-white text-sm px-3 py-1 rounded-full font-medium">Best Seller</span>
+                
+                <!-- Image Navigation Dots -->
+                <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+                    <button class="w-3 h-3 rounded-full bg-green-600 image-dot active transition-all duration-200" data-image="0"></button>
+                    <button class="w-3 h-3 rounded-full bg-white/60 image-dot transition-all duration-200" data-image="1"></button>
+                    <button class="w-3 h-3 rounded-full bg-white/60 image-dot transition-all duration-200" data-image="2"></button>
+                    <button class="w-3 h-3 rounded-full bg-white/60 image-dot transition-all duration-200" data-image="3"></button>
+                </div>
+            </div>
+            
+            <!-- Thumbnail Images -->
+            <div class="flex space-x-3 mt-4 overflow-x-auto scrollbar-hide">
+                <button class="thumbnail-btn min-w-[60px] h-16 bg-white rounded-xl overflow-hidden border-2 border-green-500 transition-all duration-200" data-image="0">
+                    <img src="https://images.unsplash.com/photo-1590502593747-42a4e2643a36?w=80&h=80&fit=crop&crop=center" alt="Lemon 1" class="w-full h-full object-cover">
+                </button>
+                <button class="thumbnail-btn min-w-[60px] h-16 bg-white rounded-xl overflow-hidden border-2 border-gray-200 transition-all duration-200" data-image="1">
+                    <img src="https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=80&h=80&fit=crop&crop=center" alt="Lemon 2" class="w-full h-full object-cover">
+                </button>
+                <button class="thumbnail-btn min-w-[60px] h-16 bg-white rounded-xl overflow-hidden border-2 border-gray-200 transition-all duration-200" data-image="2">
+                    <img src="https://images.unsplash.com/photo-1582979512210-99b6a53386f9?w=80&h=80&fit=crop&crop=center" alt="Lemon 3" class="w-full h-full object-cover">
+                </button>
+                <button class="thumbnail-btn min-w-[60px] h-16 bg-white rounded-xl overflow-hidden border-2 border-gray-200 transition-all duration-200" data-image="3">
+                    <img src="https://images.unsplash.com/photo-1557800636-894a64c1696f?w=80&h=80&fit=crop&crop=center" alt="Lemon 4" class="w-full h-full object-cover">
+                </button>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="p-6 pb-32">
+            <div class="mb-6">
+                <div class="flex items-start justify-between mb-3">
+                    <div>
+                        <h1 class="text-2xl font-bold text-gray-800 mb-1">Jeruk Lemon Segar</h1>
+                        <p class="text-gray-500 text-sm">Organik • 1kg</p>
+                    </div>
+                    
+                    <!-- Rating -->
+                    <div class="flex items-center space-x-1">
+                        <div class="star-rating">
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star empty">★</span>
+                        </div>
+                        <span class="text-sm text-gray-500">(4.2)</span>
+                    </div>
+                </div>
+
+                <!-- Price -->
+                <div class="flex items-center space-x-3 mb-4">
+                    <span class="text-lg text-gray-400 price-strikethrough">Rp 35.000</span>
+                    <span class="text-3xl font-bold text-green-600">Rp 25.000</span>
+                    <span class="bg-red-100 text-red-600 text-sm px-2 py-1 rounded-full font-medium">Hemat Rp 10.000</span>
+                </div>
+
+                <!-- Quick Info -->
+                <div class="grid grid-cols-3 gap-3 mb-6">
+                    <div class="bg-green-50 p-3 rounded-xl text-center">
+                        <div class="text-green-600 text-lg font-bold">100%</div>
+                        <div class="text-xs text-gray-600">Organik</div>
+                    </div>
+                    <div class="bg-blue-50 p-3 rounded-xl text-center">
+                        <div class="text-blue-600 text-lg font-bold">Fresh</div>
+                        <div class="text-xs text-gray-600">Hari ini</div>
+                    </div>
+                    <div class="bg-orange-50 p-3 rounded-xl text-center">
+                        <div class="text-orange-600 text-lg font-bold">Grade A</div>
+                        <div class="text-xs text-gray-600">Kualitas</div>
+                    </div>
+                </div>
+
+                <!-- Description -->
+                <div class="mb-6">
+                    <p class="text-gray-600 leading-relaxed">
+                        Jeruk lemon organik segar berkualitas premium, dipetik langsung dari kebun organik terpercaya. 
+                        Kaya akan vitamin C dan antioksidan alami yang baik untuk kesehatan. 
+                        Cocok untuk jus, masakan, atau dikonsumsi langsung.
+                    </p>
+                </div>
+
+                <!-- Quantity Selector dan Add to Cart akan dipindah ke sticky bottom -->
+
+                <!-- Delivery Info -->
+                <div class="bg-blue-50 p-4 rounded-2xl mb-6">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                            <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="font-medium text-gray-800">Pengiriman Cepat</div>
+                            <div class="text-sm text-gray-600">Akan tiba dalam 1 jam • Gratis ongkir min. Rp 100.000</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabs Section -->
+            <div class="mb-8">
+                <div class="flex space-x-1 mb-4 bg-gray-100 p-1 rounded-xl">
+                    <button onclick="switchTab('details')" class="tab-btn flex-1 py-2 px-4 rounded-lg font-medium transition-all duration-200 text-sm bg-white text-green-600 shadow-sm">
+                        Detail
+                    </button>
+                    <button onclick="switchTab('nutrition')" class="tab-btn flex-1 py-2 px-4 rounded-lg font-medium transition-all duration-200 text-sm text-gray-600">
+                        Nutrisi
+                    </button>
+                    <button onclick="switchTab('reviews')" class="tab-btn flex-1 py-2 px-4 rounded-lg font-medium transition-all duration-200 text-sm text-gray-600">
+                        Review
+                    </button>
+                </div>
+
+                <!-- Tab Contents -->
+                <div id="details" class="tab-content active">
+                    <div class="space-y-3">
+                        <div class="flex justify-between py-2 border-b border-gray-100">
+                            <span class="text-gray-600">Asal</span>
+                            <span class="font-medium">Kebun Organik Malang</span>
+                        </div>
+                        <div class="flex justify-between py-2 border-b border-gray-100">
+                            <span class="text-gray-600">Berat</span>
+                            <span class="font-medium">1 kg (±10-12 buah)</span>
+                        </div>
+                        <div class="flex justify-between py-2 border-b border-gray-100">
+                            <span class="text-gray-600">Sertifikat</span>
+                            <span class="font-medium">Organik, Halal MUI</span>
+                        </div>
+                        <div class="flex justify-between py-2 border-b border-gray-100">
+                            <span class="text-gray-600">Masa Simpan</span>
+                            <span class="font-medium">7-10 hari</span>
+                        </div>
+                        <div class="flex justify-between py-2">
+                            <span class="text-gray-600">Storage</span>
+                            <span class="font-medium">Kulkas 4-8°C</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="nutrition" class="tab-content">
+                    <div class="space-y-3">
+                        <div class="text-sm text-gray-600 mb-3">Per 100 gram:</div>
+                        <div class="flex justify-between py-2 border-b border-gray-100">
+                            <span class="text-gray-600">Kalori</span>
+                            <span class="font-medium">29 kcal</span>
+                        </div>
+                        <div class="flex justify-between py-2 border-b border-gray-100">
+                            <span class="text-gray-600">Vitamin C</span>
+                            <span class="font-medium">53 mg</span>
+                        </div>
+                        <div class="flex justify-between py-2 border-b border-gray-100">
+                            <span class="text-gray-600">Karbohidrat</span>
+                            <span class="font-medium">9.3 g</span>
+                        </div>
+                        <div class="flex justify-between py-2 border-b border-gray-100">
+                            <span class="text-gray-600">Protein</span>
+                            <span class="font-medium">1.1 g</span>
+                        </div>
+                        <div class="flex justify-between py-2">
+                            <span class="text-gray-600">Lemak</span>
+                            <span class="font-medium">0.3 g</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="reviews" class="tab-content">
+                    <div class="space-y-4">
+                        <!-- Review Summary -->
+                        <div class="bg-gray-50 p-4 rounded-xl">
+                            <div class="flex items-center justify-between mb-2">
+                                <div class="flex items-center space-x-2">
+                                    <span class="text-2xl font-bold">4.2</span>
+                                    <div class="star-rating">
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                        <span class="star empty">★</span>
+                                    </div>
+                                </div>
+                                <span class="text-sm text-gray-500">42 review</span>
+                            </div>
+                        </div>
+
+                        <!-- Individual Reviews -->
+                        <div class="space-y-4">
+                            <div class="border-b border-gray-100 pb-4">
+                                <div class="flex items-start space-x-3">
+                                    <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                                        <span class="text-green-600 font-medium text-sm">S</span>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex items-center space-x-2 mb-1">
+                                            <span class="font-medium text-sm">Sari</span>
+                                            <div class="star-rating text-xs">
+                                                <span class="star">★</span>
+                                                <span class="star">★</span>
+                                                <span class="star">★</span>
+                                                <span class="star">★</span>
+                                                <span class="star">★</span>
+                                            </div>
+                                        </div>
+                                        <p class="text-sm text-gray-600">Lemonnya fresh banget! Aromanya harum dan rasanya asam segar. Packaging juga rapi.</p>
+                                        <span class="text-xs text-gray-400">2 hari lalu</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="border-b border-gray-100 pb-4">
+                                <div class="flex items-start space-x-3">
+                                    <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                                        <span class="text-blue-600 font-medium text-sm">A</span>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex items-center space-x-2 mb-1">
+                                            <span class="font-medium text-sm">Ahmad</span>
+                                            <div class="star-rating text-xs">
+                                                <span class="star">★</span>
+                                                <span class="star">★</span>
+                                                <span class="star">★</span>
+                                                <span class="star">★</span>
+                                                <span class="star empty">★</span>
+                                            </div>
+                                        </div>
+                                        <p class="text-sm text-gray-600">Kualitas bagus, ukuran sesuai deskripsi. Cuma pengiriman agak lama.</p>
+                                        <span class="text-xs text-gray-400">5 hari lalu</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="w-full text-green-600 font-medium py-2 border border-green-300 rounded-xl hover:bg-green-50 transition-colors duration-200">
+                            Lihat Semua Review
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Related Products -->
+            <div class="mb-8">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-xl font-bold text-gray-800">Produk Serupa</h2>
+                </div>
+                
+                <div class="overflow-x-auto scrollbar-hide">
+                    <div class="flex space-x-4 pb-2" style="scroll-snap-type: x mandatory;">
+                        <!-- Related Product 1 -->
+                        <div class="min-w-[160px] bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300" style="scroll-snap-align: start;">
+                            <div class="relative w-full aspect-square bg-gray-100 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=160&h=160&fit=crop&crop=center" alt="Jeruk Nipis" class="w-full h-full object-cover">
+                                <span class="absolute top-2 right-2 bg-blue-500 text-white text-xs px-2 py-1 rounded-full font-medium">New</span>
+                            </div>
+                            <div class="p-3">
+                                <h3 class="font-bold text-gray-800 text-sm mb-1">Jeruk Nipis</h3>
+                                <p class="text-xs text-gray-500 mb-2">500g</p>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm font-bold text-green-600">Rp 18.000</span>
+                                    <button class="w-6 h-6 bg-green-600 text-white rounded-full flex items-center justify-center hover:bg-green-700 transition-colors duration-200">
+                                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Related Product 2 -->
+                        <div class="min-w-[160px] bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                            <div class="relative w-full aspect-square bg-gray-100 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1557800636-894a64c1696f?w=160&h=160&fit=crop&crop=center" alt="Jeruk Manis" class="w-full h-full object-cover">
+                                <span class="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full font-medium">15% OFF</span>
+                            </div>
+                            <div class="p-3">
+                                <h3 class="font-bold text-gray-800 text-sm mb-1">Jeruk Manis</h3>
+                                <p class="text-xs text-gray-500 mb-2">1kg</p>
+                                <div class="flex justify-between items-center">
+                                    <div class="flex flex-col">
+                                        <span class="text-xs text-gray-400 price-strikethrough">Rp 24.000</span>
+                                        <span class="text-sm font-bold text-green-600">Rp 20.000</span>
+                                    </div>
+                                    <button class="w-6 h-6 bg-green-600 text-white rounded-full flex items-center justify-center hover:bg-green-700 transition-colors duration-200">
+                                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Related Product 3 -->
+                        <div class="min-w-[160px] bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                            <div class="relative w-full aspect-square bg-gray-100 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1582979512210-99b6a53386f9?w=160&h=160&fit=crop&crop=center" alt="Jeruk Bali" class="w-full h-full object-cover">
+                                <span class="absolute top-2 right-2 bg-orange-500 text-white text-xs px-2 py-1 rounded-full font-medium">Premium</span>
+                            </div>
+                            <div class="p-3">
+                                <h3 class="font-bold text-gray-800 text-sm mb-1">Jeruk Bali</h3>
+                                <p class="text-xs text-gray-500 mb-2">1 buah</p>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm font-bold text-green-600">Rp 15.000</span>
+                                    <button class="w-6 h-6 bg-green-600 text-white rounded-full flex items-center justify-center hover:bg-green-700 transition-colors duration-200">
+                                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sticky Bottom - Quantity & Add to Cart -->
+        <div class="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-2xl bg-white border-t border-gray-200 p-4 shadow-lg z-50">
+            <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center space-x-4">
+                    <span class="text-gray-800 font-medium">Jumlah:</span>
+                    <div class="flex items-center space-x-3">
+                        <button onclick="decreaseQuantity()" class="quantity-btn w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-200 transition-all duration-200">
+                            <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/>
+                            </svg>
+                        </button>
+                        <span id="quantity" class="text-xl font-bold text-gray-800 min-w-[3rem] text-center">1</span>
+                        <button onclick="increaseQuantity()" class="quantity-btn w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-200 transition-all duration-200">
+                            <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="text-right">
+                    <div class="text-sm text-gray-500">Total</div>
+                    <div id="totalPrice" class="text-2xl font-bold text-green-600">Rp 25.000</div>
+                </div>
+            </div>
+
+            <button onclick="addToCart()" class="w-full bg-gradient-to-r from-green-500 to-green-600 text-white py-4 rounded-2xl font-bold text-lg hover:from-green-600 hover:to-green-700 transition-all duration-300 transform hover:scale-[1.02] shadow-lg">
+                <div class="flex items-center justify-center space-x-2">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                    </svg>
+                    <span>Tambah ke Keranjang</span>
+                </div>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        let currentQuantity = 1;
+        const basePrice = 25000;
+        
+        // Product images
+        const productImages = [
+            "https://images.unsplash.com/photo-1590502593747-42a4e2643a36?w=400&h=400&fit=crop&crop=center",
+            "https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=400&h=400&fit=crop&crop=center",
+            "https://images.unsplash.com/photo-1582979512210-99b6a53386f9?w=400&h=400&fit=crop&crop=center",
+            "https://images.unsplash.com/photo-1557800636-894a64c1696f?w=400&h=400&fit=crop&crop=center"
+        ];
+
+        // Quantity functions
+        function increaseQuantity() {
+            currentQuantity++;
+            updateQuantityDisplay();
+        }
+
+        function decreaseQuantity() {
+            if (currentQuantity > 1) {
+                currentQuantity--;
+                updateQuantityDisplay();
+            }
+        }
+
+        function updateQuantityDisplay() {
+            document.getElementById('quantity').textContent = currentQuantity;
+            const totalPrice = basePrice * currentQuantity;
+            document.getElementById('totalPrice').textContent = `Rp ${totalPrice.toLocaleString('id-ID')}`;
+        }
+
+        // Image switching function
+        function switchImage(imageIndex) {
+            const mainImage = document.getElementById('mainProductImage');
+            const imageDots = document.querySelectorAll('.image-dot');
+            const thumbnailBtns = document.querySelectorAll('.thumbnail-btn');
+            
+            // Fade effect
+            mainImage.style.opacity = '0.7';
+            
+            setTimeout(() => {
+                mainImage.src = productImages[imageIndex];
+                mainImage.style.opacity = '1';
+            }, 150);
+            
+            // Update dots
+            imageDots.forEach((dot, index) => {
+                if (index === imageIndex) {
+                    dot.classList.remove('bg-white/60');
+                    dot.classList.add('bg-green-600');
+                } else {
+                    dot.classList.add('bg-white/60');
+                    dot.classList.remove('bg-green-600');
+                }
+            });
+            
+            // Update thumbnails
+            thumbnailBtns.forEach((btn, index) => {
+                if (index === imageIndex) {
+                    btn.classList.remove('border-gray-200');
+                    btn.classList.add('border-green-500');
+                } else {
+                    btn.classList.add('border-gray-200');
+                    btn.classList.remove('border-green-500');
+                }
+            });
+        }
+
+        // Tab switching
+        function switchTab(tabName) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active class from all tab buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('bg-white', 'text-green-600', 'shadow-sm');
+                btn.classList.add('text-gray-600');
+            });
+            
+            // Show selected tab content
+            document.getElementById(tabName).classList.add('active');
+            
+            // Add active class to clicked tab button
+            event.target.classList.add('bg-white', 'text-green-600', 'shadow-sm');
+            event.target.classList.remove('text-gray-600');
+        }
+
+        // Add to cart function
+        function addToCart() {
+            const button = event.target.closest('button');
+            const originalText = button.innerHTML;
+            
+            // Button animation and feedback
+            button.style.transform = 'scale(0.98)';
+            button.innerHTML = `
+                <div class="flex items-center justify-center space-x-2">
+                    <svg class="w-6 h-6 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                    </svg>
+                    <span>Menambahkan...</span>
+                </div>
+            `;
+            
+            setTimeout(() => {
+                button.style.transform = 'scale(1)';
+                button.innerHTML = `
+                    <div class="flex items-center justify-center space-x-2">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                        </svg>
+                        <span>Berhasil Ditambahkan!</span>
+                    </div>
+                `;
+                button.classList.remove('from-green-500', 'to-green-600');
+                button.classList.add('from-green-600', 'to-green-700');
+                
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                    button.classList.add('from-green-500', 'to-green-600');
+                    button.classList.remove('from-green-600', 'to-green-700');
+                }, 2000);
+            }, 1000);
+
+            // Show success message (you can integrate with your cart system here)
+            console.log(`Added ${currentQuantity} Jeruk Lemon Segar to cart`);
+        }
+
+        // Go back function
+        function goBack() {
+            window.history.back();
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            updateQuantityDisplay();
+            
+            // Image dots functionality
+            document.querySelectorAll('.image-dot').forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    switchImage(index);
+                });
+            });
+            
+            // Thumbnail functionality
+            document.querySelectorAll('.thumbnail-btn').forEach((btn, index) => {
+                btn.addEventListener('click', () => {
+                    switchImage(index);
+                });
+            });
+        });
+
+        // Click animations for buttons
+        document.querySelectorAll('button:not(.quantity-btn):not(.tab-btn):not(.image-dot):not(.thumbnail-btn)').forEach(button => {
+            button.addEventListener('click', function(e) {
+                if (!this.onclick || this.onclick.toString().indexOf('addToCart') === -1) {
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = 'scale(1)';
+                    }, 150);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

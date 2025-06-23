@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kategori - Halo, Halal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#10b981',
+                        secondary: '#ffa726'
+                    },
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Hide scrollbar for mobile sliders */
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Smooth scrolling for mobile */
+        .scrollbar-hide {
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Category card animations */
+        .category-card {
+            transition: all 0.3s ease;
+        }
+        .category-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        /* Filter button animations */
+        .filter-btn {
+            transition: all 0.2s ease;
+        }
+        .filter-btn.active {
+            transform: scale(1.05);
+        }
+
+        /* Search input focus effect */
+        .search-input:focus {
+            transform: scale(1.02);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen font-poppins">
+    <div class="max-w-2xl mx-auto bg-white shadow-xl min-h-screen">
+        <!-- Header -->
+        <div class="bg-white text-gray-800 p-6 border-b border-gray-100 sticky top-0 z-30">
+            <div class="flex justify-between items-center mb-6">
+                <button onclick="goBack()" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors duration-200">
+                    <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                    </svg>
+                </button>
+                
+                <h1 class="text-xl font-bold text-gray-800">Kategori</h1>
+                
+                <a href="cart.html" class="relative">
+                    <div class="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center hover:bg-green-700 transition-colors duration-200">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                        </svg>
+                    </div>
+                    <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
+                </a>
+            </div>
+            
+            <!-- Search Bar -->
+            <div class="relative mb-4">
+                <input type="text" placeholder="Cari kategori..." 
+                       class="search-input w-full bg-gray-50 text-gray-800 placeholder-gray-500 px-12 py-4 rounded-2xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-300"
+                       onkeyup="searchCategories(event)">
+                <svg class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                </svg>
+            </div>
+
+            <!-- Filter Buttons -->
+            <div class="flex space-x-2 overflow-x-auto scrollbar-hide pb-2">
+                <button onclick="filterCategories('all')" class="filter-btn px-4 py-2 bg-green-600 text-white rounded-full text-sm font-medium whitespace-nowrap transition-all duration-200 active">
+                    Semua
+                </button>
+                <button onclick="filterCategories('fresh')" class="filter-btn px-4 py-2 bg-gray-100 text-gray-600 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-200">
+                    Segar
+                </button>
+                <button onclick="filterCategories('organic')" class="filter-btn px-4 py-2 bg-gray-100 text-gray-600 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-200">
+                    Organik
+                </button>
+                <button onclick="filterCategories('frozen')" class="filter-btn px-4 py-2 bg-gray-100 text-gray-600 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-200">
+                    Frozen
+                </button>
+                <button onclick="filterCategories('halal')" class="filter-btn px-4 py-2 bg-gray-100 text-gray-600 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-200">
+                    Halal
+                </button>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="p-6 pb-24">
+            <!-- Popular Categories -->
+            <div class="mb-8">
+                <h2 class="text-lg font-bold text-gray-800 mb-4">Kategori Populer</h2>
+                <div class="grid grid-cols-3 gap-3">
+                    <a href="products.html" class="category-card bg-orange-50 p-4 rounded-2xl text-center hover:bg-orange-100 transition-all duration-300 block" data-category="fresh">
+                        <div class="w-12 h-12 bg-orange-200 rounded-xl mx-auto mb-3 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=60&h=60&fit=crop&crop=center" alt="Fruits" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="font-semibold text-gray-800 text-sm">Buah-buahan</h3>
+                        <p class="text-xs text-gray-500 mt-1">45+ produk</p>
+                    </a>
+
+                    <a href="products.html" class="category-card bg-green-50 p-4 rounded-2xl text-center hover:bg-green-100 transition-all duration-300 block" data-category="fresh organic">
+                        <div class="w-12 h-12 bg-green-200 rounded-xl mx-auto mb-3 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?w=60&h=60&fit=crop&crop=center" alt="Vegetables" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="font-semibold text-gray-800 text-sm">Sayuran</h3>
+                        <p class="text-xs text-gray-500 mt-1">38+ produk</p>
+                    </a>
+
+                    <a href="products.html" class="category-card bg-blue-50 p-4 rounded-2xl text-center hover:bg-blue-100 transition-all duration-300 block" data-category="fresh halal">
+                        <div class="w-12 h-12 bg-blue-200 rounded-xl mx-auto mb-3 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1563636619-e9143da7973b?w=60&h=60&fit=crop&crop=center" alt="Dairy" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="font-semibold text-gray-800 text-sm">Dairy</h3>
+                        <p class="text-xs text-gray-500 mt-1">25+ produk</p>
+                    </a>
+                </div>
+            </div>
+
+            <!-- All Categories -->
+            <div class="mb-8">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-lg font-bold text-gray-800">Semua Kategori</h2>
+                    <span class="text-sm text-gray-500" id="categoryCount">24 kategori</span>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4" id="categoriesGrid">
+                    <!-- Fresh & Fruits Category -->
+                    <a href="products.html" class="category-card bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 block" data-category="fresh">
+                        <div class="relative h-32 bg-gradient-to-br from-orange-100 to-orange-200 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=128&fit=crop&crop=center" alt="Buah-buahan" class="w-full h-full object-cover opacity-80">
+                            <div class="absolute top-2 left-2">
+                                <span class="bg-orange-500 text-white text-xs px-2 py-1 rounded-full font-medium">Fresh</span>
+                            </div>
+                            <div class="absolute bottom-2 right-2">
+                                <span class="bg-white/80 text-orange-600 text-xs px-2 py-1 rounded-full font-medium">45+</span>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-bold text-gray-800 mb-1">Buah-buahan</h3>
+                            <p class="text-sm text-gray-500">Buah segar & manis</p>
+                        </div>
+                    </a>
+
+                    <!-- Vegetables Category -->
+                    <a href="products.html" class="category-card bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 block" data-category="fresh organic">
+                        <div class="relative h-32 bg-gradient-to-br from-green-100 to-green-200 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?w=200&h=128&fit=crop&crop=center" alt="Sayuran" class="w-full h-full object-cover opacity-80">
+                            <div class="absolute top-2 left-2">
+                                <span class="bg-green-500 text-white text-xs px-2 py-1 rounded-full font-medium">Organic</span>
+                            </div>
+                            <div class="absolute bottom-2 right-2">
+                                <span class="bg-white/80 text-green-600 text-xs px-2 py-1 rounded-full font-medium">38+</span>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-bold text-gray-800 mb-1">Sayuran</h3>
+                            <p class="text-sm text-gray-500">Sayur organik segar</p>
+                        </div>
+                    </a>
+
+                    <!-- Dairy Category -->
+                    <a href="products.html" class="category-card bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 block" data-category="fresh halal">
+                        <div class="relative h-32 bg-gradient-to-br from-blue-100 to-blue-200 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1563636619-e9143da7973b?w=200&h=128&fit=crop&crop=center" alt="Dairy" class="w-full h-full object-cover opacity-80">
+                            <div class="absolute top-2 left-2">
+                                <span class="bg-blue-500 text-white text-xs px-2 py-1 rounded-full font-medium">Halal</span>
+                            </div>
+                            <div class="absolute bottom-2 right-2">
+                                <span class="bg-white/80 text-blue-600 text-xs px-2 py-1 rounded-full font-medium">25+</span>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-bold text-gray-800 mb-1">Dairy & Susu</h3>
+                            <p class="text-sm text-gray-500">Produk susu halal</p>
+                        </div>
+                    </a>
+
+                    <!-- Meat Category -->
+                    <a href="products.html" class="category-card bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 block" data-category="fresh halal">
+                        <div class="relative h-32 bg-gradient-to-br from-red-100 to-red-200 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1448078873724-f02b2adc5d5b?w=200&h=128&fit=crop&crop=center" alt="Meat" class="w-full h-full object-cover opacity-80">
+                            <div class="absolute top-2 left-2">
+                                <span class="bg-red-500 text-white text-xs px-2 py-1 rounded-full font-medium">Halal</span>
+                            </div>
+                            <div class="absolute bottom-2 right-2">
+                                <span class="bg-white/80 text-red-600 text-xs px-2 py-1 rounded-full font-medium">32+</span>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-bold text-gray-800 mb-1">Daging & Unggas</h3>
+                            <p class="text-sm text-gray-500">Daging halal segar</p>
+                        </div>
+                    </a>
+
+                    <!-- Seafood Category -->
+                    <a href="products.html" class="category-card bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 block" data-category="fresh halal">
+                        <div class="relative h-32 bg-gradient-to-br from-cyan-100 to-cyan-200 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1544943910-4c1dc44aab44?w=200&h=128&fit=crop&crop=center" alt="Seafood" class="w-full h-full object-cover opacity-80">
+                            <div class="absolute top-2 left-2">
+                                <span class="bg-cyan-500 text-white text-xs px-2 py-1 rounded-full font-medium">Fresh</span>
+                            </div>
+                            <div class="absolute bottom-2 right-2">
+                                <span class="bg-white/80 text-cyan-600 text-xs px-2 py-1 rounded-full font-medium">28+</span>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-bold text-gray-800 mb-1">Seafood</h3>
+                            <p class="text-sm text-gray-500">Ikan & udang segar</p>
+                        </div>
+                    </a>
+
+                    <!-- Grains & Rice Category -->
+                    <a href="products.html" class="category-card bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 block" data-category="organic">
+                        <div class="relative h-32 bg-gradient-to-br from-yellow-100 to-yellow-200 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1551754655-cd27e38d2076?w=200&h=128&fit=crop&crop=center" alt="Grains" class="w-full h-full object-cover opacity-80">
+                            <div class="absolute top-2 left-2">
+                                <span class="bg-yellow-500 text-white text-xs px-2 py-1 rounded-full font-medium">Organic</span>
+                            </div>
+                            <div class="absolute bottom-2 right-2">
+                                <span class="bg-white/80 text-yellow-600 text-xs px-2 py-1 rounded-full font-medium">22+</span>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-bold text-gray-800 mb-1">Beras & Biji-bijian</h3>
+                            <p class="text-sm text-gray-500">Beras premium</p>
+                        </div>
+                    </a>
+
+                    <!-- Snacks Category -->
+                    <a href="products.html" class="category-card bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 block" data-category="halal">
+                        <div class="relative h-32 bg-gradient-to-br from-purple-100 to-purple-200 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1606312619070-d48b4c652a52?w=200&h=128&fit=crop&crop=center" alt="Snacks" class="w-full h-full object-cover opacity-80">
+                            <div class="absolute top-2 left-2">
+                                <span class="bg-purple-500 text-white text-xs px-2 py-1 rounded-full font-medium">Halal</span>
+                            </div>
+                            <div class="absolute bottom-2 right-2">
+                                <span class="bg-white/80 text-purple-600 text-xs px-2 py-1 rounded-full font-medium">35+</span>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-bold text-gray-800 mb-1">Snack & Camilan</h3>
+                            <p class="text-sm text-gray-500">Camilan halal</p>
+                        </div>
+                    </a>
+
+                    <!-- Beverages Category -->
+                    <a href="products.html" class="category-card bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 block" data-category="halal">
+                        <div class="relative h-32 bg-gradient-to-br from-indigo-100 to-indigo-200 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=200&h=128&fit=crop&crop=center" alt="Beverages" class="w-full h-full object-cover opacity-80">
+                            <div class="absolute top-2 left-2">
+                                <span class="bg-indigo-500 text-white text-xs px-2 py-1 rounded-full font-medium">Halal</span>
+                            </div>
+                            <div class="absolute bottom-2 right-2">
+                                <span class="bg-white/80 text-indigo-600 text-xs px-2 py-1 rounded-full font-medium">30+</span>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-bold text-gray-800 mb-1">Minuman</h3>
+                            <p class="text-sm text-gray-500">Minuman segar</p>
+                        </div>
+                    </a>
+
+                    <!-- Spices Category -->
+                    <a href="products.html" class="category-card bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 block" data-category="organic">
+                        <div class="relative h-32 bg-gradient-to-br from-amber-100 to-amber-200 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=200&h=128&fit=crop&crop=center" alt="Spices" class="w-full h-full object-cover opacity-80">
+                            <div class="absolute top-2 left-2">
+                                <span class="bg-amber-500 text-white text-xs px-2 py-1 rounded-full font-medium">Organic</span>
+                            </div>
+                            <div class="absolute bottom-2 right-2">
+                                <span class="bg-white/80 text-amber-600 text-xs px-2 py-1 rounded-full font-medium">18+</span>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-bold text-gray-800 mb-1">Rempah & Bumbu</h3>
+                            <p class="text-sm text-gray-500">Rempah organik</p>
+                        </div>
+                    </a>
+
+                    <!-- Frozen Category -->
+                    <a href="products.html" class="category-card bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 block" data-category="frozen halal">
+                        <div class="relative h-32 bg-gradient-to-br from-slate-100 to-slate-200 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=200&h=128&fit=crop&crop=center" alt="Frozen" class="w-full h-full object-cover opacity-80">
+                            <div class="absolute top-2 left-2">
+                                <span class="bg-slate-500 text-white text-xs px-2 py-1 rounded-full font-medium">Frozen</span>
+                            </div>
+                            <div class="absolute bottom-2 right-2">
+                                <span class="bg-white/80 text-slate-600 text-xs px-2 py-1 rounded-full font-medium">26+</span>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-bold text-gray-800 mb-1">Frozen Food</h3>
+                            <p class="text-sm text-gray-500">Makanan beku</p>
+                        </div>
+                    </a>
+
+                    <!-- Bread & Bakery Category -->
+                    <a href="products.html" class="category-card bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 block" data-category="halal">
+                        <div class="relative h-32 bg-gradient-to-br from-orange-100 to-yellow-200 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1549931319-a545dcf3bc73?w=200&h=128&fit=crop&crop=center" alt="Bakery" class="w-full h-full object-cover opacity-80">
+                            <div class="absolute top-2 left-2">
+                                <span class="bg-orange-500 text-white text-xs px-2 py-1 rounded-full font-medium">Halal</span>
+                            </div>
+                            <div class="absolute bottom-2 right-2">
+                                <span class="bg-white/80 text-orange-600 text-xs px-2 py-1 rounded-full font-medium">20+</span>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-bold text-gray-800 mb-1">Roti & Bakery</h3>
+                            <p class="text-sm text-gray-500">Roti segar halal</p>
+                        </div>
+                    </a>
+
+                    <!-- Health & Beauty Category -->
+                    <a href="products.html" class="category-card bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 block" data-category="organic">
+                        <div class="relative h-32 bg-gradient-to-br from-pink-100 to-pink-200 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?w=200&h=128&fit=crop&crop=center" alt="Health" class="w-full h-full object-cover opacity-80">
+                            <div class="absolute top-2 left-2">
+                                <span class="bg-pink-500 text-white text-xs px-2 py-1 rounded-full font-medium">Organic</span>
+                            </div>
+                            <div class="absolute bottom-2 right-2">
+                                <span class="bg-white/80 text-pink-600 text-xs px-2 py-1 rounded-full font-medium">15+</span>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-bold text-gray-800 mb-1">Kesehatan & Kecantikan</h3>
+                            <p class="text-sm text-gray-500">Produk organik</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- No Results Message -->
+            <div id="noResults" class="hidden text-center py-12">
+                <div class="w-24 h-24 bg-gray-100 rounded-full mx-auto mb-4 flex items-center justify-center">
+                    <svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-bold text-gray-800 mb-2">Kategori tidak ditemukan</h3>
+                <p class="text-gray-500">Coba gunakan kata kunci yang berbeda</p>
+            </div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <div class="bg-white border-t border-gray-200 p-4 sticky bottom-0">
+            <div class="flex justify-around items-center">
+                <a href="index.html" class="flex flex-col items-center space-y-1 text-gray-400 hover:text-green-600 transition-colors duration-200">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                    </svg>
+                    <span class="text-xs font-medium">Home</span>
+                </a>
+                
+                <button class="flex flex-col items-center space-y-1 text-green-600">
+                    <div class="w-6 h-6 bg-green-600 rounded-lg flex items-center justify-center">
+                        <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
+                        </svg>
+                    </div>
+                    <span class="text-xs font-medium">Categories</span>
+                </button>
+
+                <a href="transactions.html" class="flex flex-col items-center space-y-1 text-gray-400 hover:text-green-600 transition-colors duration-200">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/>
+                    </svg>
+                    <span class="text-xs font-medium">Transactions</span>
+                </a>
+
+                <a href="dashboard.html" class="flex flex-col items-center space-y-1 text-gray-400 hover:text-green-600 transition-colors duration-200">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    <span class="text-xs font-medium">Profile</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let allCategories = [];
+
+        // Initialize categories array from DOM
+        function initializeCategories() {
+            const categoryCards = document.querySelectorAll('.category-card');
+            allCategories = Array.from(categoryCards).map(card => ({
+                element: card,
+                name: card.querySelector('h3').textContent.toLowerCase(),
+                category: card.getAttribute('data-category') || '',
+                visible: true
+            }));
+        }
+
+        // Search functionality
+        function searchCategories(event) {
+            const searchTerm = event.target.value.toLowerCase();
+            let visibleCount = 0;
+
+            allCategories.forEach(category => {
+                const matchesSearch = category.name.includes(searchTerm);
+                
+                if (matchesSearch) {
+                    category.element.style.display = 'block';
+                    category.visible = true;
+                    visibleCount++;
+                } else {
+                    category.element.style.display = 'none';
+                    category.visible = false;
+                }
+            });
+
+            updateCategoryCount(visibleCount);
+            toggleNoResults(visibleCount === 0);
+        }
+
+        // Filter functionality
+        function filterCategories(filterType) {
+            // Update active filter button
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('bg-green-600', 'text-white', 'active');
+                btn.classList.add('bg-gray-100', 'text-gray-600');
+            });
+            
+            event.target.classList.remove('bg-gray-100', 'text-gray-600');
+            event.target.classList.add('bg-green-600', 'text-white', 'active');
+
+            let visibleCount = 0;
+
+            allCategories.forEach(category => {
+                const matchesFilter = filterType === 'all' || 
+                                    category.category.includes(filterType);
+                
+                if (matchesFilter) {
+                    category.element.style.display = 'block';
+                    category.visible = true;
+                    visibleCount++;
+                } else {
+                    category.element.style.display = 'none';
+                    category.visible = false;
+                }
+            });
+
+            updateCategoryCount(visibleCount);
+            toggleNoResults(visibleCount === 0);
+
+            // Clear search when filtering
+            document.querySelector('.search-input').value = '';
+        }
+
+        // Update category count
+        function updateCategoryCount(count) {
+            document.getElementById('categoryCount').textContent = `${count} kategori`;
+        }
+
+        // Toggle no results message
+        function toggleNoResults(show) {
+            const noResults = document.getElementById('noResults');
+            const categoriesGrid = document.getElementById('categoriesGrid');
+            
+            if (show) {
+                noResults.classList.remove('hidden');
+                categoriesGrid.style.display = 'none';
+            } else {
+                noResults.classList.add('hidden');
+                categoriesGrid.style.display = 'grid';
+            }
+        }
+
+        // Go back function
+        function goBack() {
+            window.history.back();
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeCategories();
+            
+            // Add click animations
+            document.querySelectorAll('.category-card').forEach(card => {
+                card.addEventListener('click', function(e) {
+                    this.style.transform = 'scale(0.98)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 150);
+                });
+            });
+
+            // Add filter button animations
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 150);
+                });
+            });
+        });
+
+        // Add search input animation
+        document.querySelector('.search-input').addEventListener('focus', function() {
+            this.parentElement.style.transform = 'scale(1.02)';
+        });
+
+        document.querySelector('.search-input').addEventListener('blur', function() {
+            this.parentElement.style.transform = 'scale(1)';
+        });
+    </script>
+</body>
+</html>

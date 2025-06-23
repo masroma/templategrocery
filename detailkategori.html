@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buah-buahan - Halo, Halal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#10b981',
+                        secondary: '#ffa726'
+                    },
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Hide scrollbar for mobile sliders */
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Smooth scrolling for mobile */
+        .scrollbar-hide {
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Product card animations */
+        .product-card {
+            transition: all 0.3s ease;
+        }
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        /* Strikethrough animation */
+        .price-strikethrough {
+            position: relative;
+            text-decoration: line-through;
+            text-decoration-color: #ef4444;
+            text-decoration-thickness: 2px;
+        }
+
+        /* Discount pulse animation */
+        @keyframes discountPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .discount-pulse {
+            animation: discountPulse 2s infinite;
+        }
+
+        /* Parallax hero effect */
+        .hero-parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        /* Tab switching */
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Subcategory card animations */
+        .subcategory-card {
+            transition: all 0.3s ease;
+        }
+        .subcategory-card:hover {
+            transform: translateY(-2px) scale(1.02);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen font-poppins">
+    <div class="max-w-2xl mx-auto bg-white shadow-xl min-h-screen">
+        <!-- Header -->
+        <div class="bg-white text-gray-800 p-6 border-b border-gray-100 sticky top-0 z-30">
+            <div class="flex justify-between items-center">
+                <button onclick="goBack()" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors duration-200">
+                    <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                    </svg>
+                </button>
+                
+                <div class="text-center">
+                    <h1 class="text-xl font-bold text-gray-800">Buah-buahan</h1>
+                    <p class="text-sm text-gray-500">Fresh & Healthy Fruits</p>
+                </div>
+                
+                <a href="cart.html" class="relative">
+                    <div class="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center hover:bg-green-700 transition-colors duration-200">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                        </svg>
+                    </div>
+                    <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Hero Section -->
+        <div class="relative h-48 bg-gradient-to-br from-orange-400 via-yellow-400 to-green-400 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1619566636858-adf3ef46400b?w=600&h=400&fit=crop&crop=center" 
+                 alt="Fresh Fruits" 
+                 class="w-full h-full object-cover opacity-80">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+            
+            <!-- Hero Content -->
+            <div class="absolute bottom-6 left-6 right-6 text-white">
+                <h2 class="text-2xl font-bold mb-2">Buah Segar & Berkualitas</h2>
+                <p class="text-sm opacity-90 mb-3">Pilihan terbaik buah-buahan segar untuk kesehatan keluarga</p>
+                
+                <!-- Quick Stats -->
+                <div class="flex space-x-4">
+                    <div class="bg-white/20 backdrop-blur-sm rounded-lg px-3 py-2">
+                        <div class="text-lg font-bold">45+</div>
+                        <div class="text-xs">Produk</div>
+                    </div>
+                    <div class="bg-white/20 backdrop-blur-sm rounded-lg px-3 py-2">
+                        <div class="text-lg font-bold">100%</div>
+                        <div class="text-xs">Fresh</div>
+                    </div>
+                    <div class="bg-white/20 backdrop-blur-sm rounded-lg px-3 py-2">
+                        <div class="text-lg font-bold">Daily</div>
+                        <div class="text-xs">Delivery</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Floating Search -->
+            <div class="absolute top-6 left-6 right-6">
+                <div class="relative">
+                    <input type="text" placeholder="Cari buah..." 
+                           class="w-full bg-white/90 backdrop-blur-sm text-gray-800 placeholder-gray-500 px-12 py-3 rounded-2xl border border-white/20 focus:outline-none focus:ring-2 focus:ring-white/50 transition-all duration-300"
+                           onkeyup="searchProducts(event)">
+                    <svg class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="p-6 pb-24">
+            <!-- Category Info Tabs -->
+            <div class="mb-8">
+                <div class="flex space-x-1 mb-4 bg-gray-100 p-1 rounded-xl">
+                    <button onclick="switchTab('overview')" class="tab-btn flex-1 py-2 px-4 rounded-lg font-medium transition-all duration-200 text-sm bg-white text-green-600 shadow-sm">
+                        Overview
+                    </button>
+                    <button onclick="switchTab('benefits')" class="tab-btn flex-1 py-2 px-4 rounded-lg font-medium transition-all duration-200 text-sm text-gray-600">
+                        Benefits
+                    </button>
+                    <button onclick="switchTab('tips')" class="tab-btn flex-1 py-2 px-4 rounded-lg font-medium transition-all duration-200 text-sm text-gray-600">
+                        Tips
+                    </button>
+                </div>
+
+                <!-- Tab Contents -->
+                <div id="overview" class="tab-content active">
+                    <div class="bg-orange-50 p-4 rounded-2xl">
+                        <h3 class="font-bold text-gray-800 mb-2">Tentang Kategori Buah-buahan</h3>
+                        <p class="text-sm text-gray-600 leading-relaxed">
+                            Koleksi lengkap buah-buahan segar dari petani lokal dan import berkualitas. 
+                            Semua buah dipilih dengan standar kualitas tinggi dan kesegaran terjamin. 
+                            Tersedia berbagai jenis mulai dari buah tropis lokal hingga buah import premium.
+                        </p>
+                    </div>
+                </div>
+
+                <div id="benefits" class="tab-content">
+                    <div class="bg-green-50 p-4 rounded-2xl">
+                        <h3 class="font-bold text-gray-800 mb-3">Manfaat Buah-buahan</h3>
+                        <ul class="space-y-2 text-sm text-gray-600">
+                            <li class="flex items-center space-x-2">
+                                <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                                <span>Kaya vitamin C dan antioksidan</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                                <span>Meningkatkan sistem imun tubuh</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                                <span>Membantu mencegah penyakit kronis</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                                <span>Sumber serat untuk pencernaan sehat</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="tips" class="tab-content">
+                    <div class="bg-blue-50 p-4 rounded-2xl">
+                        <h3 class="font-bold text-gray-800 mb-3">Tips Memilih & Menyimpan</h3>
+                        <div class="space-y-3 text-sm text-gray-600">
+                            <div>
+                                <strong>Memilih:</strong> Pilih buah dengan kulit mulus, warna cerah, dan aroma segar
+                            </div>
+                            <div>
+                                <strong>Menyimpan:</strong> Simpan di kulkas untuk buah matang, suhu ruang untuk buah belum matang
+                            </div>
+                            <div>
+                                <strong>Konsumsi:</strong> Cuci bersih sebelum dimakan, konsumsi 2-3 porsi per hari
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Subcategories -->
+            <div class="mb-8">
+                <h2 class="text-lg font-bold text-gray-800 mb-4">Jenis Buah</h2>
+                <div class="grid grid-cols-3 gap-3">
+                    <button onclick="filterBySubcategory('citrus')" class="subcategory-card bg-orange-50 p-4 rounded-2xl text-center hover:bg-orange-100 transition-all duration-300">
+                        <div class="w-10 h-10 bg-orange-200 rounded-xl mx-auto mb-2 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1590502593747-42a4e2643a36?w=50&h=50&fit=crop&crop=center" alt="Citrus" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="font-semibold text-gray-800 text-xs">Jeruk</h3>
+                        <p class="text-xs text-gray-500">12 produk</p>
+                    </button>
+
+                    <button onclick="filterBySubcategory('tropical')" class="subcategory-card bg-yellow-50 p-4 rounded-2xl text-center hover:bg-yellow-100 transition-all duration-300">
+                        <div class="w-10 h-10 bg-yellow-200 rounded-xl mx-auto mb-2 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1553279768-865429a1a7d4?w=50&h=50&fit=crop&crop=center" alt="Tropical" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="font-semibold text-gray-800 text-xs">Tropis</h3>
+                        <p class="text-xs text-gray-500">18 produk</p>
+                    </button>
+
+                    <button onclick="filterBySubcategory('berries')" class="subcategory-card bg-purple-50 p-4 rounded-2xl text-center hover:bg-purple-100 transition-all duration-300">
+                        <div class="w-10 h-10 bg-purple-200 rounded-xl mx-auto mb-2 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1498557850523-fd3d118b962e?w=50&h=50&fit=crop&crop=center" alt="Berries" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="font-semibold text-gray-800 text-xs">Berry</h3>
+                        <p class="text-xs text-gray-500">8 produk</p>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Filter & Sort Bar -->
+            <div class="flex items-center justify-between mb-6">
+                <div class="flex items-center space-x-3">
+                    <select onchange="sortProducts()" class="bg-gray-100 px-4 py-2 rounded-xl text-sm font-medium text-gray-600 border-none focus:outline-none focus:ring-2 focus:ring-green-500 appearance-none">
+                        <option value="default">Urutkan</option>
+                        <option value="name-asc">Nama A-Z</option>
+                        <option value="name-desc">Nama Z-A</option>
+                        <option value="price-asc">Harga Terendah</option>
+                        <option value="price-desc">Harga Tertinggi</option>
+                        <option value="discount">Diskon Terbesar</option>
+                        <option value="popular">Terpopuler</option>
+                    </select>
+
+                    <button onclick="toggleFilter()" class="flex items-center space-x-2 bg-gray-100 px-4 py-2 rounded-xl hover:bg-gray-200 transition-colors duration-200">
+                        <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.207A1 1 0 013 6.5V4z"/>
+                        </svg>
+                        <span class="text-sm font-medium text-gray-600">Filter</span>
+                    </button>
+                </div>
+
+                <button onclick="toggleView()" class="bg-gray-100 p-2 rounded-xl hover:bg-gray-200 transition-colors duration-200">
+                    <svg id="viewIcon" class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Featured Products -->
+            <div class="mb-8">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-lg font-bold text-gray-800">Produk Unggulan</h2>
+                    <button class="text-green-600 text-sm font-medium">Lihat Semua</button>
+                </div>
+                
+                <div class="overflow-x-auto scrollbar-hide">
+                    <div class="flex space-x-4 pb-2" style="scroll-snap-type: x mandatory;">
+                        <!-- Featured Product 1 -->
+                        <a href="product-detail.html" class="min-w-[160px] bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 block" style="scroll-snap-align: start;">
+                            <div class="relative w-full aspect-square bg-gray-100 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1590502593747-42a4e2643a36?w=160&h=160&fit=crop&crop=center" alt="Jeruk Lemon" class="w-full h-full object-cover">
+                                <span class="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full font-medium discount-pulse">30% OFF</span>
+                                <span class="absolute top-2 right-2 bg-yellow-500 text-white text-xs px-2 py-1 rounded-full font-medium">🔥</span>
+                            </div>
+                            <div class="p-3">
+                                <h3 class="font-bold text-gray-800 text-sm mb-1">Jeruk Lemon Segar</h3>
+                                <p class="text-xs text-gray-500 mb-2">1kg • Organik</p>
+                                <div class="flex justify-between items-center">
+                                    <div class="flex flex-col">
+                                        <span class="text-xs text-gray-400 price-strikethrough">Rp 35.000</span>
+                                        <span class="text-sm font-bold text-green-600">Rp 25.000</span>
+                                    </div>
+                                    <button onclick="event.preventDefault(); event.stopPropagation(); addToCart(this)" class="w-7 h-7 bg-green-600 text-white rounded-full flex items-center justify-center hover:bg-green-700 transition-colors duration-200">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </a>
+
+                        <!-- Featured Product 2 -->
+                        <div class="min-w-[160px] bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                            <div class="relative w-full aspect-square bg-gray-100 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1498557850523-fd3d118b962e?w=160&h=160&fit=crop&crop=center" alt="Blueberry" class="w-full h-full object-cover">
+                                <span class="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full font-medium">21% OFF</span>
+                                <span class="absolute top-2 right-2 bg-blue-500 text-white text-xs px-2 py-1 rounded-full font-medium">Premium</span>
+                            </div>
+                            <div class="p-3">
+                                <h3 class="font-bold text-gray-800 text-sm mb-1">Blueberry Fresh</h3>
+                                <p class="text-xs text-gray-500 mb-2">125g • Import</p>
+                                <div class="flex justify-between items-center">
+                                    <div class="flex flex-col">
+                                        <span class="text-xs text-gray-400 price-strikethrough">Rp 70.000</span>
+                                        <span class="text-sm font-bold text-green-600">Rp 55.000</span>
+                                    </div>
+                                    <button onclick="addToCart(this)" class="w-7 h-7 bg-green-600 text-white rounded-full flex items-center justify-center hover:bg-green-700 transition-colors duration-200">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Featured Product 3 -->
+                        <div class="min-w-[160px] bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                            <div class="relative w-full aspect-square bg-gray-100 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?w=160&h=160&fit=crop&crop=center" alt="Apel Fuji" class="w-full h-full object-cover">
+                                <span class="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full font-medium">22% OFF</span>
+                                <span class="absolute top-2 right-2 bg-yellow-500 text-white text-xs px-2 py-1 rounded-full font-medium">Import</span>
+                            </div>
+                            <div class="p-3">
+                                <h3 class="font-bold text-gray-800 text-sm mb-1">Apel Fuji</h3>
+                                <p class="text-xs text-gray-500 mb-2">1kg • Import</p>
+                                <div class="flex justify-between items-center">
+                                    <div class="flex flex-col">
+                                        <span class="text-xs text-gray-400 price-strikethrough">Rp 45.000</span>
+                                        <span class="text-sm font-bold text-green-600">Rp 35.000</span>
+                                    </div>
+                                    <button onclick="addToCart(this)" class="w-7 h-7 bg-green-600 text-white rounded-full flex items-center justify-center hover:bg-green-700 transition-colors duration-200">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- View All Card -->
+                        <div class="min-w-[160px] bg-gradient-to-br from-green-50 to-green-100 rounded-2xl shadow-lg p-4 flex flex-col items-center justify-center border-2 border-dashed border-green-300 hover:border-green-500 transition-colors duration-300 cursor-pointer">
+                            <div class="w-10 h-10 bg-green-200 rounded-full flex items-center justify-center mb-3">
+                                <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                                </svg>
+                            </div>
+                            <h3 class="font-bold text-green-600 text-sm">View All</h3>
+                            <p class="text-xs text-green-500 text-center">42+ produk lainnya</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- All Products Grid -->
+            <div class="mb-8">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-lg font-bold text-gray-800">Semua Produk</h2>
+                    <span class="text-sm text-gray-500" id="productCount">45 produk</span>
+                </div>
+
+                <div id="productsGrid" class="grid grid-cols-2 gap-4">
+                    <!-- Product 1 -->
+                    <div class="product-card bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300" 
+                         data-name="jeruk nipis segar" data-price="18000" data-category="citrus local" data-subcategory="citrus">
+                        <div class="relative w-full aspect-square bg-gray-100 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=200&h=200&fit=crop&crop=center" alt="Jeruk Nipis" class="w-full h-full object-cover">
+                            <span class="absolute top-2 right-2 bg-green-500 text-white text-xs px-2 py-1 rounded-full font-medium">Fresh</span>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-bold text-gray-800 text-sm mb-1">Jeruk Nipis Segar</h3>
+                            <p class="text-xs text-gray-500 mb-2">Lokal • 500g</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm font-bold text-green-600">Rp 18.000</span>
+                                <button onclick="addToCart(this)" class="w-7 h-7 bg-green-600 text-white rounded-full flex items-center justify-center hover:bg-green-700 transition-colors duration-200">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 2 -->
+                    <div class="product-card bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300" 
+                         data-name="jeruk manis" data-price="20000" data-original-price="24000" data-category="citrus local" data-discount="15" data-subcategory="citrus">
+                        <div class="relative w-full aspect-square bg-gray-100 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1557800636-894a64c1696f?w=200&h=200&fit=crop&crop=center" alt="Jeruk Manis" class="w-full h-full object-cover">
+                            <span class="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full font-medium">15% OFF</span>
+                            <span class="absolute top-2 right-2 bg-orange-500 text-white text-xs px-2 py-1 rounded-full font-medium">Promo</span>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-bold text-gray-800 text-sm mb-1">Jeruk Manis</h3>
+                            <p class="text-xs text-gray-500 mb-2">Lokal • 1kg</p>
+                            <div class="flex justify-between items-center">
+                                <div class="flex flex-col">
+                                    <span class="text-xs text-gray-400 price-strikethrough">Rp 24.000</span>
+                                    <span class="text-sm font-bold text-green-600">Rp 20.000</span>
+                                </div>
+                                <button onclick="addToCart(this)" class="w-7 h-7 bg-green-600 text-white rounded-full flex items-center justify-center hover:bg-green-700 transition-colors duration-200">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 3 -->
+                    <div class="product-card bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300" 
+                         data-name="mangga gedong gincu" data-price="28000" data-original-price="35000" data-category="tropical local" data-discount="20" data-subcategory="tropical">
+                        <div class="relative w-full aspect-square bg-gray-100 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1553279768-865429a1a7d4?w=200&h=200&fit=crop&crop=center" alt="Mangga" class="w-full h-full object-cover">
+                            <span class="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full font-medium">20% OFF</span>
+                            <span class="absolute top-2 right-2 bg-yellow-500 text-white text-xs px-2 py-1 rounded-full font-medium">Sweet</span>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-bold text-gray-800 text-sm mb-1">Mangga Gedong Gincu</h3>
+                            <p class="text-xs text-gray-500 mb-2">Lokal • 1kg</p>
+                            <div class="flex justify-between items-center">
+                                <div class="flex flex-col">
+                                    <span class="text-xs text-gray-400 price-strikethrough">Rp 35.000</span>
+                                    <span class="text-sm font-bold text-green-600">Rp 28.000</span>
+                                </div>
+                                <button onclick="addToCart(this)" class="w-7 h-7 bg-green-600 text-white rounded-full flex items-center justify-center hover:bg-green-700 transition-colors duration-200">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 4 -->
+                    <div class="product-card bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300" 
+                         data-name="pisang cavendish" data-price="22000" data-category="tropical imported" data-subcategory="tropical">
+                        <div class="relative w-full aspect-square bg-gray-100 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=200&h=200&fit=crop&crop=center" alt="Pisang" class="w-full h-full object-cover">
+                            <span class="absolute top-2 right-2 bg-yellow-500 text-white text-xs px-2 py-1 rounded-full font-medium">Import</span>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-bold text-gray-800 text-sm mb-1">Pisang Cavendish</h3>
+                            <p class="text-xs text-gray-500 mb-2">Import • 1kg</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm font-bold text-green-600">Rp 22.000</span>
+                                <button onclick="addToCart(this)" class="w-7 h-7 bg-green-600 text-white rounded-full flex items-center justify-center hover:bg-green-700 transition-colors duration-200">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 5 -->
+                    <div class="product-card bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300" 
+                         data-name="strawberry segar" data-price="45000" data-category="berries imported" data-subcategory="berries">
+                        <div class="relative w-full aspect-square bg-gray-100 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1543528176-61b239494933?w=200&h=200&fit=crop&crop=center" alt="Strawberry" class="w-full h-full object-cover">
+                            <span class="absolute top-2 right-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full font-medium">Fresh</span>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-bold text-gray-800 text-sm mb-1">Strawberry Segar</h3>
+                            <p class="text-xs text-gray-500 mb-2">Import • 250g</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm font-bold text-green-600">Rp 45.000</span>
+                                <button onclick="addToCart(this)" class="w-7 h-7 bg-green-600 text-white rounded-full flex items-center justify-center hover:bg-green-700 transition-colors duration-200">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 6 -->
+                    <div class="product-card bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300" 
+                         data-name="anggur merah" data-price="38000" data-category="berries imported" data-subcategory="berries">
+                        <div class="relative w-full aspect-square bg-gray-100 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1537640538966-79f369143715?w=200&h=200&fit=crop&crop=center" alt="Anggur" class="w-full h-full object-cover">
+                            <span class="absolute top-2 right-2 bg-purple-500 text-white text-xs px-2 py-1 rounded-full font-medium">Sweet</span>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-bold text-gray-800 text-sm mb-1">Anggur Merah</h3>
+                            <p class="text-xs text-gray-500 mb-2">Import • 500g</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm font-bold text-green-600">Rp 38.000</span>
+                                <button onclick="addToCart(this)" class="w-7 h-7 bg-green-600 text-white rounded-full flex items-center justify-center hover:bg-green-700 transition-colors duration-200">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Load More Button -->
+                <div class="text-center mt-6">
+                    <button onclick="loadMore()" class="bg-gradient-to-r from-green-500 to-green-600 text-white px-8 py-3 rounded-2xl font-medium hover:from-green-600 hover:to-green-700 transition-all duration-300 transform hover:scale-[1.02]">
+                        Muat Lebih Banyak
+                    </button>
+                </div>
+            </div>
+
+            <!-- Related Categories -->
+            <div class="mb-8">
+                <h2 class="text-lg font-bold text-gray-800 mb-4">Kategori Terkait</h2>
+                <div class="grid grid-cols-2 gap-4">
+                    <a href="category-detail.html" class="bg-gradient-to-br from-green-100 to-green-200 p-4 rounded-2xl hover:from-green-200 hover:to-green-300 transition-all duration-300">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-green-300 rounded-xl overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?w=60&h=60&fit=crop&crop=center" alt="Sayuran" class="w-full h-full object-cover">
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-800 text-sm">Sayuran</h3>
+                                <p class="text-xs text-gray-600">38+ produk</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="category-detail.html" class="bg-gradient-to-br from-blue-100 to-blue-200 p-4 rounded-2xl hover:from-blue-200 hover:to-blue-300 transition-all duration-300">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-blue-300 rounded-xl overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1563636619-e9143da7973b?w=60&h=60&fit=crop&crop=center" alt="Dairy" class="w-full h-full object-cover">
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-800 text-sm">Dairy</h3>
+                                <p class="text-xs text-gray-600">25+ produk</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <div class="bg-white border-t border-gray-200 p-4 sticky bottom-0">
+            <div class="flex justify-around items-center">
+                <a href="index.html" class="flex flex-col items-center space-y-1 text-gray-400 hover:text-green-600 transition-colors duration-200">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                    </svg>
+                    <span class="text-xs font-medium">Home</span>
+                </a>
+                
+                <a href="categories.html" class="flex flex-col items-center space-y-1 text-green-600">
+                    <div class="w-6 h-6 bg-green-600 rounded-lg flex items-center justify-center">
+                        <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
+                        </svg>
+                    </div>
+                    <span class="text-xs font-medium">Categories</span>
+                </a>
+
+                <a href="transactions.html" class="flex flex-col items-center space-y-1 text-gray-400 hover:text-green-600 transition-colors duration-200">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/>
+                    </svg>
+                    <span class="text-xs font-medium">Transactions</span>
+                </a>
+
+                <a href="dashboard.html" class="flex flex-col items-center space-y-1 text-gray-400 hover:text-green-600 transition-colors duration-200">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    <span class="text-xs font-medium">Profile</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let allProducts = [];
+        let filteredProducts = [];
+        let activeSubcategory = 'all';
+        let currentView = 'grid';
+
+        // Initialize products
+        function initializeProducts() {
+            const productCards = document.querySelectorAll('.product-card');
+            allProducts = Array.from(productCards).map(card => ({
+                element: card,
+                name: card.getAttribute('data-name'),
+                price: parseInt(card.getAttribute('data-price')),
+                originalPrice: card.getAttribute('data-original-price') ? parseInt(card.getAttribute('data-original-price')) : null,
+                category: card.getAttribute('data-category') || '',
+                subcategory: card.getAttribute('data-subcategory') || '',
+                discount: card.getAttribute('data-discount') ? parseInt(card.getAttribute('data-discount')) : 0
+            }));
+            filteredProducts = [...allProducts];
+            updateProductCount();
+        }
+
+        // Tab switching
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('bg-white', 'text-green-600', 'shadow-sm');
+                btn.classList.add('text-gray-600');
+            });
+            
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('bg-white', 'text-green-600', 'shadow-sm');
+            event.target.classList.remove('text-gray-600');
+        }
+
+        // Filter by subcategory
+        function filterBySubcategory(subcategory) {
+            activeSubcategory = subcategory;
+            
+            // Update subcategory button styles
+            document.querySelectorAll('.subcategory-card').forEach(card => {
+                card.classList.remove('bg-green-100', 'ring-2', 'ring-green-500');
+            });
+            
+            if (subcategory !== 'all') {
+                event.target.classList.add('bg-green-100', 'ring-2', 'ring-green-500');
+            }
+
+            applyFilters();
+        }
+
+        // Apply filters
+        function applyFilters() {
+            filteredProducts = allProducts.filter(product => {
+                if (activeSubcategory !== 'all' && !product.subcategory.includes(activeSubcategory)) {
+                    return false;
+                }
+                return true;
+            });
+
+            displayProducts();
+            updateProductCount();
+        }
+
+        // Display products
+        function displayProducts() {
+            allProducts.forEach(product => {
+                product.element.style.display = 'none';
+            });
+
+            filteredProducts.forEach(product => {
+                product.element.style.display = 'block';
+            });
+        }
+
+        // Search products
+        function searchProducts(event) {
+            const searchTerm = event.target.value.toLowerCase();
+            
+            filteredProducts = allProducts.filter(product => {
+                const matchesSearch = product.name.includes(searchTerm);
+                const matchesSubcategory = activeSubcategory === 'all' || product.subcategory.includes(activeSubcategory);
+                return matchesSearch && matchesSubcategory;
+            });
+
+            displayProducts();
+            updateProductCount();
+        }
+
+        // Sort products
+        function sortProducts() {
+            const sortValue = event.target.value;
+
+            switch(sortValue) {
+                case 'name-asc':
+                    filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
+                    break;
+                case 'name-desc':
+                    filteredProducts.sort((a, b) => b.name.localeCompare(a.name));
+                    break;
+                case 'price-asc':
+                    filteredProducts.sort((a, b) => a.price - b.price);
+                    break;
+                case 'price-desc':
+                    filteredProducts.sort((a, b) => b.price - a.price);
+                    break;
+                case 'discount':
+                    filteredProducts.sort((a, b) => b.discount - a.discount);
+                    break;
+                case 'popular':
+                    // Sort by popularity (simulated by discount for now)
+                    filteredProducts.sort((a, b) => b.discount - a.discount);
+                    break;
+                default:
+                    filteredProducts = allProducts.filter(p => 
+                        filteredProducts.some(fp => fp.element === p.element)
+                    );
+            }
+
+            reorderProductsInDOM();
+        }
+
+        // Reorder products in DOM
+        function reorderProductsInDOM() {
+            const grid = document.getElementById('productsGrid');
+            
+            filteredProducts.forEach(product => {
+                if (product.element.parentNode === grid) {
+                    grid.removeChild(product.element);
+                }
+            });
+
+            filteredProducts.forEach(product => {
+                grid.appendChild(product.element);
+            });
+        }
+
+        // Toggle filter (placeholder)
+        function toggleFilter() {
+            // Add filter implementation here
+            console.log('Filter toggled');
+        }
+
+        // Toggle view
+        function toggleView() {
+            const grid = document.getElementById('productsGrid');
+            const icon = document.getElementById('viewIcon');
+            
+            if (currentView === 'grid') {
+                grid.className = 'space-y-4';
+                currentView = 'list';
+                icon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>`;
+            } else {
+                grid.className = 'grid grid-cols-2 gap-4';
+                currentView = 'grid';
+                icon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/>`;
+            }
+        }
+
+        // Update product count
+        function updateProductCount() {
+            document.getElementById('productCount').textContent = `${filteredProducts.length} produk`;
+        }
+
+        // Add to cart
+        function addToCart(button) {
+            button.style.transform = 'scale(0.9)';
+            button.style.backgroundColor = '#059669';
+            
+            setTimeout(() => {
+                button.style.transform = 'scale(1)';
+                button.style.backgroundColor = '#10b981';
+            }, 200);
+
+            console.log('Product added to cart!');
+        }
+
+        // Load more
+        function loadMore() {
+            const button = event.target;
+            button.innerHTML = 'Memuat...';
+            button.disabled = true;
+            
+            setTimeout(() => {
+                button.innerHTML = 'Semua produk telah dimuat';
+                button.classList.add('opacity-50', 'cursor-not-allowed');
+            }, 2000);
+        }
+
+        // Go back
+        function goBack() {
+            window.history.back();
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeProducts();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promo 50% OFF - Halo, Halal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#10b981',
+                        secondary: '#ffa726'
+                    },
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Hide scrollbar for mobile sliders */
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Smooth scrolling for mobile */
+        .scrollbar-hide {
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Floating particles animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .floating-particle {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-particle:nth-child(2) {
+            animation-delay: -2s;
+        }
+
+        .floating-particle:nth-child(3) {
+            animation-delay: -4s;
+        }
+
+        /* Discount pulse animation */
+        @keyframes discountPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .discount-pulse {
+            animation: discountPulse 2s infinite;
+        }
+
+        /* Countdown timer */
+        .countdown-item {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        /* Progress bar animation */
+        .progress-bar {
+            transition: width 2s ease-in-out;
+        }
+
+        /* Card hover effects */
+        .promo-card {
+            transition: all 0.3s ease;
+        }
+        .promo-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 35px -5px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Share modal */
+        .share-modal {
+            opacity: 0;
+            transform: translateY(100%);
+            transition: all 0.3s ease;
+        }
+        .share-modal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* FAQ accordion */
+        .faq-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        .faq-content.active {
+            max-height: 200px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen font-poppins">
+    <div class="max-w-2xl mx-auto bg-white shadow-xl min-h-screen">
+        <!-- Header -->
+        <div class="bg-white text-gray-800 p-6 border-b border-gray-100 sticky top-0 z-30">
+            <div class="flex justify-between items-center">
+                <button onclick="goBack()" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors duration-200">
+                    <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                    </svg>
+                </button>
+                
+                <h1 class="text-lg font-bold text-gray-800">Promo Special</h1>
+                
+                <button onclick="sharePromo()" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors duration-200">
+                    <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Hero Banner Section -->
+        <div class="relative overflow-hidden">
+            <div class="h-80 bg-gradient-to-br from-orange-400 via-pink-500 to-purple-600">
+                <!-- Floating Particles -->
+                <div class="absolute inset-0 overflow-hidden">
+                    <div class="floating-particle absolute top-10 left-10 w-6 h-6 bg-white/20 rounded-full"></div>
+                    <div class="floating-particle absolute top-20 right-16 w-4 h-4 bg-white/30 rounded-full"></div>
+                    <div class="floating-particle absolute bottom-20 left-20 w-8 h-8 bg-white/15 rounded-full"></div>
+                </div>
+
+                <!-- Main Banner Content -->
+                <div class="relative z-10 flex flex-col items-center justify-center h-full text-white p-6">
+                    <div class="text-center mb-6">
+                        <div class="discount-pulse inline-block bg-white/20 backdrop-blur-sm px-6 py-2 rounded-full mb-4">
+                            <span class="text-2xl font-bold">🎉 PROMO SPESIAL</span>
+                        </div>
+                        
+                        <h1 class="text-5xl font-bold mb-2">50% OFF</h1>
+                        <h2 class="text-2xl font-semibold mb-3">Pembelian Pertama</h2>
+                        <p class="text-lg opacity-90">Hemat hingga Rp 100.000</p>
+                    </div>
+
+                    <!-- Countdown Timer -->
+                    <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-4 mb-6">
+                        <div class="text-center mb-3">
+                            <p class="text-sm opacity-90">Promo berakhir dalam:</p>
+                        </div>
+                        <div class="flex space-x-3 justify-center">
+                            <div class="countdown-item text-center p-3 rounded-xl text-white">
+                                <div class="text-2xl font-bold" id="days">07</div>
+                                <div class="text-xs">Hari</div>
+                            </div>
+                            <div class="countdown-item text-center p-3 rounded-xl text-white">
+                                <div class="text-2xl font-bold" id="hours">12</div>
+                                <div class="text-xs">Jam</div>
+                            </div>
+                            <div class="countdown-item text-center p-3 rounded-xl text-white">
+                                <div class="text-2xl font-bold" id="minutes">34</div>
+                                <div class="text-xs">Menit</div>
+                            </div>
+                            <div class="countdown-item text-center p-3 rounded-xl text-white">
+                                <div class="text-2xl font-bold" id="seconds">56</div>
+                                <div class="text-xs">Detik</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CTA Button -->
+                    <button onclick="claimPromo()" class="bg-white text-purple-600 px-8 py-4 rounded-2xl font-bold text-lg hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-2xl">
+                        Klaim Sekarang
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="p-6 pb-24">
+            <!-- Promo Details -->
+            <div class="mb-8">
+                <h2 class="text-xl font-bold text-gray-800 mb-4">Detail Promo</h2>
+                
+                <div class="bg-gradient-to-r from-orange-50 to-pink-50 p-6 rounded-2xl mb-6">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 bg-orange-200 rounded-xl flex items-center justify-center">
+                            <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-gray-800 text-lg mb-2">Diskon 50% untuk Pelanggan Baru</h3>
+                            <p class="text-gray-600 text-sm leading-relaxed">
+                                Nikmati diskon fantastis 50% untuk pembelian pertama Anda! Belanja produk halal berkualitas 
+                                dengan harga spesial. Promo terbatas, jangan sampai terlewat!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Promo Statistics -->
+                <div class="grid grid-cols-3 gap-4 mb-6">
+                    <div class="bg-white p-4 rounded-2xl border border-gray-100 text-center">
+                        <div class="text-2xl font-bold text-purple-600 mb-1">2,847</div>
+                        <div class="text-xs text-gray-500">Sudah Klaim</div>
+                    </div>
+                    <div class="bg-white p-4 rounded-2xl border border-gray-100 text-center">
+                        <div class="text-2xl font-bold text-green-600 mb-1">7 Hari</div>
+                        <div class="text-xs text-gray-500">Tersisa</div>
+                    </div>
+                    <div class="bg-white p-4 rounded-2xl border border-gray-100 text-center">
+                        <div class="text-2xl font-bold text-orange-600 mb-1">100K</div>
+                        <div class="text-xs text-gray-500">Max Hemat</div>
+                    </div>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="bg-gray-100 rounded-full p-1 mb-4">
+                    <div class="progress-bar bg-gradient-to-r from-purple-500 to-pink-500 h-2 rounded-full" style="width: 68%"></div>
+                </div>
+                <div class="flex justify-between text-sm text-gray-500">
+                    <span>2,847 pengguna sudah klaim</span>
+                    <span>68% kuota terpakai</span>
+                </div>
+            </div>
+
+            <!-- How to Use -->
+            <div class="mb-8">
+                <h2 class="text-xl font-bold text-gray-800 mb-4">Cara Menggunakan</h2>
+                
+                <div class="space-y-4">
+                    <div class="flex items-start space-x-4 p-4 bg-white rounded-2xl border border-gray-100">
+                        <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center text-purple-600 font-bold text-sm flex-shrink-0">1</div>
+                        <div>
+                            <h3 class="font-semibold text-gray-800 mb-1">Klik "Klaim Sekarang"</h3>
+                            <p class="text-sm text-gray-600">Tekan tombol untuk mengaktifkan promo di akun Anda</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start space-x-4 p-4 bg-white rounded-2xl border border-gray-100">
+                        <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center text-purple-600 font-bold text-sm flex-shrink-0">2</div>
+                        <div>
+                            <h3 class="font-semibold text-gray-800 mb-1">Belanja Produk Favorit</h3>
+                            <p class="text-sm text-gray-600">Pilih produk halal berkualitas dengan minimum belanja Rp 50.000</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start space-x-4 p-4 bg-white rounded-2xl border border-gray-100">
+                        <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center text-purple-600 font-bold text-sm flex-shrink-0">3</div>
+                        <div>
+                            <h3 class="font-semibold text-gray-800 mb-1">Checkout & Bayar</h3>
+                            <p class="text-sm text-gray-600">Diskon otomatis terapkan saat checkout. Hemat hingga Rp 100.000!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Featured Products -->
+            <div class="mb-8">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-xl font-bold text-gray-800">Produk Rekomendasi</h2>
+                    <button class="text-purple-600 text-sm font-medium">Lihat Semua</button>
+                </div>
+                
+                <div class="overflow-x-auto scrollbar-hide">
+                    <div class="flex space-x-4 pb-2" style="scroll-snap-type: x mandatory;">
+                        <!-- Featured Product 1 -->
+                        <div class="promo-card min-w-[160px] bg-white rounded-2xl shadow-lg overflow-hidden" style="scroll-snap-align: start;">
+                            <div class="relative w-full aspect-square bg-gray-100 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1590502593747-42a4e2643a36?w=160&h=160&fit=crop&crop=center" alt="Jeruk Lemon" class="w-full h-full object-cover">
+                                <span class="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full font-medium">30% OFF</span>
+                            </div>
+                            <div class="p-3">
+                                <h3 class="font-bold text-gray-800 text-sm mb-1">Jeruk Lemon Segar</h3>
+                                <p class="text-xs text-gray-500 mb-2">1kg • Organik</p>
+                                <div class="flex justify-between items-center">
+                                    <div class="flex flex-col">
+                                        <span class="text-xs text-gray-400 line-through">Rp 35.000</span>
+                                        <span class="text-sm font-bold text-green-600">Rp 25.000</span>
+                                    </div>
+                                    <button class="w-7 h-7 bg-purple-600 text-white rounded-full flex items-center justify-center hover:bg-purple-700 transition-colors duration-200">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Featured Product 2 -->
+                        <div class="promo-card min-w-[160px] bg-white rounded-2xl shadow-lg overflow-hidden">
+                            <div class="relative w-full aspect-square bg-gray-100 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1448078873724-f02b2adc5d5b?w=160&h=160&fit=crop&crop=center" alt="Daging Sapi" class="w-full h-full object-cover">
+                                <span class="absolute top-2 left-2 bg-green-500 text-white text-xs px-2 py-1 rounded-full font-medium">Halal</span>
+                            </div>
+                            <div class="p-3">
+                                <h3 class="font-bold text-gray-800 text-sm mb-1">Daging Sapi Premium</h3>
+                                <p class="text-xs text-gray-500 mb-2">500g • Fresh</p>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm font-bold text-green-600">Rp 85.000</span>
+                                    <button class="w-7 h-7 bg-purple-600 text-white rounded-full flex items-center justify-center hover:bg-purple-700 transition-colors duration-200">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Featured Product 3 -->
+                        <div class="promo-card min-w-[160px] bg-white rounded-2xl shadow-lg overflow-hidden">
+                            <div class="relative w-full aspect-square bg-gray-100 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?w=160&h=160&fit=crop&crop=center" alt="Sayuran" class="w-full h-full object-cover">
+                                <span class="absolute top-2 left-2 bg-blue-500 text-white text-xs px-2 py-1 rounded-full font-medium">Fresh</span>
+                            </div>
+                            <div class="p-3">
+                                <h3 class="font-bold text-gray-800 text-sm mb-1">Paket Sayuran</h3>
+                                <p class="text-xs text-gray-500 mb-2">Mix • Organik</p>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm font-bold text-green-600">Rp 45.000</span>
+                                    <button class="w-7 h-7 bg-purple-600 text-white rounded-full flex items-center justify-center hover:bg-purple-700 transition-colors duration-200">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Terms & Conditions -->
+            <div class="mb-8">
+                <h2 class="text-xl font-bold text-gray-800 mb-4">Syarat & Ketentuan</h2>
+                
+                <div class="bg-yellow-50 p-4 rounded-2xl">
+                    <div class="space-y-3 text-sm text-gray-700">
+                        <div class="flex items-start space-x-2">
+                            <span class="text-yellow-600 mt-1">•</span>
+                            <span>Berlaku hanya untuk pengguna baru yang belum pernah berbelanja</span>
+                        </div>
+                        <div class="flex items-start space-x-2">
+                            <span class="text-yellow-600 mt-1">•</span>
+                            <span>Minimum pembelian Rp 50.000 (belum termasuk ongkir)</span>
+                        </div>
+                        <div class="flex items-start space-x-2">
+                            <span class="text-yellow-600 mt-1">•</span>
+                            <span>Maksimal diskon Rp 100.000 per transaksi</span>
+                        </div>
+                        <div class="flex items-start space-x-2">
+                            <span class="text-yellow-600 mt-1">•</span>
+                            <span>Promo tidak dapat digabung dengan promo lain</span>
+                        </div>
+                        <div class="flex items-start space-x-2">
+                            <span class="text-yellow-600 mt-1">•</span>
+                            <span>Berlaku untuk semua produk kecuali kategori tertentu</span>
+                        </div>
+                        <div class="flex items-start space-x-2">
+                            <span class="text-yellow-600 mt-1">•</span>
+                            <span>Promo berakhir tanggal 31 Desember 2024 atau sampai kuota habis</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Section -->
+            <div class="mb-8">
+                <h2 class="text-xl font-bold text-gray-800 mb-4">Pertanyaan Umum</h2>
+                
+                <div class="space-y-3">
+                    <!-- FAQ 1 -->
+                    <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden">
+                        <button onclick="toggleFAQ(0)" class="w-full p-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors duration-200">
+                            <span class="font-semibold text-gray-800">Bagaimana cara menggunakan promo ini?</span>
+                            <svg class="w-5 h-5 text-gray-400 transform transition-transform duration-200 faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </button>
+                        <div class="faq-content px-4 pb-4">
+                            <p class="text-sm text-gray-600">Klik tombol "Klaim Sekarang", lalu belanja dengan minimum Rp 50.000. Diskon akan otomatis terapkan saat checkout.</p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ 2 -->
+                    <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden">
+                        <button onclick="toggleFAQ(1)" class="w-full p-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors duration-200">
+                            <span class="font-semibold text-gray-800">Apakah bisa digunakan berulang kali?</span>
+                            <svg class="w-5 h-5 text-gray-400 transform transition-transform duration-200 faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </button>
+                        <div class="faq-content px-4 pb-4">
+                            <p class="text-sm text-gray-600">Tidak, promo ini hanya berlaku sekali untuk setiap pengguna baru. Pastikan Anda memanfaatkannya dengan maksimal!</p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ 3 -->
+                    <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden">
+                        <button onclick="toggleFAQ(2)" class="w-full p-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors duration-200">
+                            <span class="font-semibold text-gray-800">Produk apa saja yang termasuk promo?</span>
+                            <svg class="w-5 h-5 text-gray-400 transform transition-transform duration-200 faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </button>
+                        <div class="faq-content px-4 pb-4">
+                            <p class="text-sm text-gray-600">Semua produk termasuk dalam promo kecuali voucher, gift card, dan produk dari merchant tertentu.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Success Stories -->
+            <div class="mb-8">
+                <h2 class="text-xl font-bold text-gray-800 mb-4">Testimoni Pengguna</h2>
+                
+                <div class="space-y-4">
+                    <div class="bg-white p-4 rounded-2xl border border-gray-100">
+                        <div class="flex items-start space-x-3">
+                            <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center">
+                                <span class="text-purple-600 font-medium text-sm">R</span>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex items-center space-x-2 mb-1">
+                                    <span class="font-medium text-sm">Rina S.</span>
+                                    <div class="flex text-yellow-400 text-xs">
+                                        <span>★★★★★</span>
+                                    </div>
+                                </div>
+                                <p class="text-sm text-gray-600 mb-2">"Wah promonya mantap! Hemat 50% untuk belanja pertama. Produknya fresh dan berkualitas. Recommended banget!"</p>
+                                <span class="text-xs text-gray-400">2 hari lalu • Hemat Rp 87.000</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-4 rounded-2xl border border-gray-100">
+                        <div class="flex items-start space-x-3">
+                            <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+                                <span class="text-green-600 font-medium text-sm">A</span>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex items-center space-x-2 mb-1">
+                                    <span class="font-medium text-sm">Ahmad F.</span>
+                                    <div class="flex text-yellow-400 text-xs">
+                                        <span>★★★★★</span>
+                                    </div>
+                                </div>
+                                <p class="text-sm text-gray-600 mb-2">"Promo gila-gilaan! Belanja sayur dan daging cuma bayar setengah harga. Pasti bakal langganan nih!"</p>
+                                <span class="text-xs text-gray-400">5 hari lalu • Hemat Rp 65.000</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sticky Bottom CTA -->
+        <div class="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-2xl bg-white border-t border-gray-200 p-4 shadow-lg z-50">
+            <div class="flex items-center justify-between mb-3">
+                <div>
+                    <div class="text-lg font-bold text-gray-800">Promo Berakhir Dalam:</div>
+                    <div class="flex space-x-2 text-sm">
+                        <span class="text-red-500 font-bold" id="bottomDays">7</span>
+                        <span class="text-gray-500">hari</span>
+                        <span class="text-red-500 font-bold" id="bottomHours">12</span>
+                        <span class="text-gray-500">jam</span>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <div class="text-2xl font-bold gradient-text">50% OFF</div>
+                    <div class="text-xs text-gray-500">Max hemat 100K</div>
+                </div>
+            </div>
+
+            <button onclick="claimPromo()" class="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white py-4 rounded-2xl font-bold text-lg hover:from-purple-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-[1.02] shadow-lg">
+                <div class="flex items-center justify-center space-x-2">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/>
+                    </svg>
+                    <span>Klaim Promo 50% OFF</span>
+                </div>
+            </button>
+        </div>
+
+        <!-- Share Modal -->
+        <div id="shareModal" class="share-modal fixed inset-0 bg-black/50 z-50 flex items-end">
+            <div class="bg-white w-full rounded-t-3xl p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-lg font-bold text-gray-800">Bagikan Promo</h3>
+                    <button onclick="closeShareModal()" class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
+                        <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-4 gap-4 mb-6">
+                    <button class="flex flex-col items-center space-y-2 p-3 rounded-xl hover:bg-gray-50 transition-colors duration-200">
+                        <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+                            <svg class="w-6 h-6 text-green-600" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.306"/>
+                            </svg>
+                        </div>
+                        <span class="text-xs font-medium text-gray-700">WhatsApp</span>
+                    </button>
+
+                    <button class="flex flex-col items-center space-y-2 p-3 rounded-xl hover:bg-gray-50 transition-colors duration-200">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                            <svg class="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                            </svg>
+                        </div>
+                        <span class="text-xs font-medium text-gray-700">Twitter</span>
+                    </button>
+
+                    <button class="flex flex-col items-center space-y-2 p-3 rounded-xl hover:bg-gray-50 transition-colors duration-200">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                            <svg class="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                            </svg>
+                        </div>
+                        <span class="text-xs font-medium text-gray-700">Facebook</span>
+                    </button>
+
+                    <button class="flex flex-col items-center space-y-2 p-3 rounded-xl hover:bg-gray-50 transition-colors duration-200">
+                        <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center">
+                            <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                            </svg>
+                        </div>
+                        <span class="text-xs font-medium text-gray-700">Salin Link</span>
+                    </button>
+                </div>
+
+                <div class="bg-gray-50 p-4 rounded-xl">
+                    <p class="text-sm text-gray-600 text-center">Ajak teman belanja dan dapatkan reward menarik!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Countdown Timer
+        function updateCountdown() {
+            const endDate = new Date('2024-12-31 23:59:59').getTime();
+            const now = new Date().getTime();
+            const distance = endDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Update main countdown
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+
+            // Update bottom countdown
+            document.getElementById('bottomDays').textContent = days;
+            document.getElementById('bottomHours').textContent = hours;
+        }
+
+        // Update countdown every second
+        setInterval(updateCountdown, 1000);
+        updateCountdown(); // Initial call
+
+        // FAQ Toggle
+        function toggleFAQ(index) {
+            const allContents = document.querySelectorAll('.faq-content');
+            const allIcons = document.querySelectorAll('.faq-icon');
+            const content = allContents[index];
+            const icon = allIcons[index];
+
+            // Close all other FAQs
+            allContents.forEach((item, i) => {
+                if (i !== index) {
+                    item.classList.remove('active');
+                    allIcons[i].style.transform = 'rotate(0deg)';
+                }
+            });
+
+            // Toggle current FAQ
+            if (content.classList.contains('active')) {
+                content.classList.remove('active');
+                icon.style.transform = 'rotate(0deg)';
+            } else {
+                content.classList.add('active');
+                icon.style.transform = 'rotate(180deg)';
+            }
+        }
+
+        // Share Modal
+        function sharePromo() {
+            document.getElementById('shareModal').classList.add('active');
+        }
+
+        function closeShareModal() {
+            document.getElementById('shareModal').classList.remove('active');
+        }
+
+        // Claim Promo
+        function claimPromo() {
+            const button = event.target.closest('button');
+            const originalText = button.innerHTML;
+            
+            button.style.transform = 'scale(0.98)';
+            button.innerHTML = `
+                <div class="flex items-center justify-center space-x-2">
+                    <svg class="w-6 h-6 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                    </svg>
+                    <span>Mengklaim...</span>
+                </div>
+            `;
+            
+            setTimeout(() => {
+                button.style.transform = 'scale(1)';
+                button.innerHTML = `
+                    <div class="flex items-center justify-center space-x-2">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                        </svg>
+                        <span>Promo Berhasil Diklaim!</span>
+                    </div>
+                `;
+                button.classList.remove('from-purple-500', 'to-pink-500');
+                button.classList.add('from-green-500', 'to-green-600');
+                
+                setTimeout(() => {
+                    // Redirect to shopping page or show success modal
+                    window.location.href = 'index.html';
+                }, 2000);
+            }, 1500);
+
+            console.log('Promo claimed successfully!');
+        }
+
+        // Go back
+        function goBack() {
+            window.history.back();
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate progress bar
+            setTimeout(() => {
+                const progressBar = document.querySelector('.progress-bar');
+                progressBar.style.width = '0%';
+                setTimeout(() => {
+                    progressBar.style.width = '68%';
+                }, 200);
+            }, 500);
+
+            // Close share modal when clicking outside
+            document.getElementById('shareModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeShareModal();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
